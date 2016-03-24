@@ -17,6 +17,8 @@ public class StateManager {
 	
 	private Logger log = Logger.getLogger(this.getClass().getName());
 	
+	private static final String FONT_UNAVAILABLE = "Unable to load font";
+	
 	private StateManager() {
 	}
 	
@@ -37,7 +39,7 @@ public class StateManager {
 			try {
 				temp.initialise();
 			} catch(FontLoadException fle) {
-				log.log(Level.SEVERE, "Unable to initialise", fle);
+				log.log(Level.SEVERE, FONT_UNAVAILABLE, fle);
 				popAll();
 			}
 		}
@@ -59,7 +61,7 @@ public class StateManager {
 			try {
 				temp.initialise();
 			} catch(FontLoadException fle) {
-				log.log(Level.SEVERE, "Unable to initialise", fle);
+				log.log(Level.SEVERE, FONT_UNAVAILABLE, fle);
 				popAll();
 			}
 		}
@@ -81,7 +83,7 @@ public class StateManager {
 			try {
 				temp.initialise(args);
 			} catch(FontLoadException fle) {
-				log.log(Level.SEVERE, "Unable to initialise", fle);
+				log.log(Level.SEVERE, FONT_UNAVAILABLE, fle);
 				popAll();
 			}
 		}
