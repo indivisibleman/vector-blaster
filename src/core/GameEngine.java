@@ -15,7 +15,7 @@ import states.IntroState;
  *
  * @author Michael Topsom
  */
-public class GameEngine implements Runnable, KeyListener {
+class GameEngine implements Runnable, KeyListener {
 	private JFrame window;
 	private Canvas canvas;
 	
@@ -40,7 +40,7 @@ public class GameEngine implements Runnable, KeyListener {
 		initialise();
 	}
 	
-	public final void initialise() {
+	private final void initialise() {
 		constants = Constants.getInstance();
 		
 		window = new JFrame();
@@ -102,15 +102,11 @@ public class GameEngine implements Runnable, KeyListener {
 		System.exit(1);
 	}
 	
-	public void resetAccumulator() {
-		accumulator = 0.0f;
-	}
-	
-	public boolean running() {
+	private boolean running() {
 		return running;
 	}
 	
-	public void render() {
+	private void render() {
 		graphics = buffer.getDrawGraphics();
 		
 		graphics.setColor(Color.BLACK);
@@ -141,5 +137,13 @@ public class GameEngine implements Runnable, KeyListener {
 		if(!stateManager.isEmpty()) {
 			stateManager.currentState().keyReleased(e);
 		}
+	}
+	
+	public static void main(String[] args) {
+		GameEngine game = new GameEngine();
+		
+		Thread gameThread = new Thread(game);
+		
+		gameThread.start();
 	}
 }
