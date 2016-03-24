@@ -171,8 +171,7 @@ class CreditsState implements State {
 		
 		g2d.setFont(fontText);
 		g2d.drawString("Made by", (640 - g2d.getFontMetrics().stringWidth("Made by")) / 2.0f, 260.0f);
-		g2d.drawString("Mike", (640 - g2d.getFontMetrics().stringWidth("Mike")) / 2.0f, 310.0f);
-		g2d.drawString("michael.topsom@googlemail.com", (640 - g2d.getFontMetrics().stringWidth("michael.topsom@googlemail.com")) / 2.0f, 360.0f);
+		g2d.drawString("Indivisible Man", (640 - g2d.getFontMetrics().stringWidth("MikeIndivisible Man")) / 2.0f, 310.0f);
 		
 		g2d.setColor(Color.BLACK);
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
