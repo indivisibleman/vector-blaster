@@ -123,6 +123,7 @@ class GameEngine implements Runnable, KeyListener {
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
+		// Method must be overridden for KeyListener, although the game does not use it
 	}
 	
 	@Override

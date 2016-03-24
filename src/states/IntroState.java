@@ -174,10 +174,6 @@ public class IntroState implements State {
 	}
 	
 	@Override
-	public void keyPressed(KeyEvent e) {
-	}
-	
-	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 			keyExit = true;
