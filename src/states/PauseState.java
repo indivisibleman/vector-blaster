@@ -23,7 +23,7 @@ import polysprite.SmallMeteor;
  *
  * @author Michael Topsom
  */
-public class PauseState implements State {
+class PauseState implements State {
 	private boolean initialised = false;
 	private boolean justLoaded = false;
 	

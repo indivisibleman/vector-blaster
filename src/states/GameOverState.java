@@ -23,7 +23,7 @@ import polysprite.SmallMeteor;
  *
  * @author Michael Topsom
  */
-public class GameOverState implements State {
+class GameOverState implements State {
 	private boolean initialised = false;
 	private boolean justLoaded = false;
 	

@@ -32,16 +32,6 @@ public class StateManager {
 		}
 	}
 	
-	public void push(State state, String args) {
-		states.add(state);
-		
-		State temp = states.lastElement();
-		
-		if(!temp.initialised()) {
-			temp.initialise(args);
-		}
-	}
-	
 	public void changeState(State state) {
 		if(!states.isEmpty()) {
 			State temp = states.elementAt(states.size() - 1);
@@ -99,7 +89,7 @@ public class StateManager {
 		}
 	}
 	
-	public State currentState() {
+	State currentState() {
 		if(!states.isEmpty()) {
 			return states.lastElement();
 		} else {

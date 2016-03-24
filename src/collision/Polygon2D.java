@@ -22,18 +22,6 @@ public class Polygon2D {
 		length = points.length;
 	}
 	
-	public void reset(Vector2D[] points) {
-		this.points = points;
-		
-		edges = new Vector2D[points.length];
-		
-		for(int i = 0; i < points.length; i++) {
-			edges[i] = new Vector2D(points[i + 1 % points.length].getX() - points[i].getX(), points[i + 1 % points.length].getY() - points[i].getY());
-		}
-		
-		length = points.length;
-	}
-	
 	private Projection projectToAxis(Vector2D vector) {
 		double min = Double.POSITIVE_INFINITY;
 		double max = Double.NEGATIVE_INFINITY;

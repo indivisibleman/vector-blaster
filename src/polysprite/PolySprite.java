@@ -19,35 +19,33 @@ import core.Constants.MeteorType;
  */
 public class PolySprite {
 	protected List<Vector2D[]> polyImages;
-	protected double imageRadius;
 	
 	protected GeneralPath poly;
 	
 	protected Color colour;
-	protected Vector2D pos;
+	private Vector2D pos;
 	protected float lineThickness;
 	
-	protected List<Vector2D[]> polyColliders;
-	protected double colliderRadius;
+	private double colliderRadius;
 	
-	protected List<Vector2D[]> polyCollidersOut;
+	private List<Vector2D[]> polyCollidersOut;
 	
-	protected List<Vector2D> positions;
-	protected Iterator<Vector2D> positionIterator;
+	private List<Vector2D> positions;
+	private Iterator<Vector2D> positionIterator;
 	
 	protected Vector2D position;
-	protected Vector2D speed;
+	private Vector2D speed;
 	
 	protected double orientation;
 	
 	protected double spin;
-	protected double spinRate;
+	private double spinRate;
 	
 	protected Vector2D[] modifiedShape;
 	
 	protected Constants constants;
 	
-	protected MeteorType type;
+	private MeteorType type;
 	
 	public PolySprite() {
 		constants = Constants.getInstance();
@@ -55,7 +53,7 @@ public class PolySprite {
 		type = MeteorType.DEFAULT;
 	}
 	
-	public void initialise(List<Vector2D[]> polyImages, Vector2D position, double orientation, double spinRate, List<Vector2D[]> polyColliders, MeteorType type) {
+	void initialise(List<Vector2D[]> polyImages, Vector2D position, double orientation, double spinRate, List<Vector2D[]> polyColliders, MeteorType type) {
 		initialise(polyImages, position, orientation, spinRate, polyColliders);
 		
 		this.type = type;
@@ -69,9 +67,8 @@ public class PolySprite {
 		this.position = position;
 	}
 	
-	public void initialise(List<Vector2D[]> polyImages, Vector2D position, double orientation, double spinRate, List<Vector2D[]> polyColliders) {
+	void initialise(List<Vector2D[]> polyImages, Vector2D position, double orientation, double spinRate, List<Vector2D[]> polyColliders) {
 		this.polyImages = polyImages;
-		this.polyColliders = polyColliders;
 		
 		this.position = position;
 		this.orientation = orientation;

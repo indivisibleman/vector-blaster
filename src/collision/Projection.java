@@ -4,11 +4,11 @@ package collision;
  *
  * @author Michael Topsom
  */
-public class Projection {
+class Projection {
 	private double min;
 	private double max;
 	
-	public Projection(double min, double max) {
+	Projection(double min, double max) {
 		this.min = min;
 		this.max = max;
 	}
@@ -21,7 +21,7 @@ public class Projection {
 		return max;
 	}
 	
-	public boolean intersects(Projection projection) {
+	boolean intersects(Projection projection) {
 		return max > projection.getMin() && projection.getMax() > min;
 	}
 }

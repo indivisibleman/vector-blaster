@@ -23,7 +23,7 @@ import polysprite.SmallMeteor;
  *
  * @author Michael Topsom
  */
-public class OptionsState implements State {
+class OptionsState implements State {
 	private boolean initialised = false;
 	private boolean justLoaded = false;
 	

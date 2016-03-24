@@ -23,7 +23,7 @@ import polysprite.SmallMeteor;
  *
  * @author Michael Topsom
  */
-public class HelpState implements State {
+class HelpState implements State {
 	private boolean initialised = false;
 	private boolean justLoaded = false;
 	

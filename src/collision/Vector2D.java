@@ -26,7 +26,7 @@ public class Vector2D {
 		return y;
 	}
 	
-	public double dotProduct(Vector2D vector) {
+	double dotProduct(Vector2D vector) {
 		return (x * vector.getX()) + (y * vector.getY());
 	}
 	
@@ -35,31 +35,22 @@ public class Vector2D {
 		y += vector.y;
 	}
 	
-	public void subtract(Vector2D vector) {
-		x -= vector.x;
-		y -= vector.y;
-	}
-	
 	public void multiply(double scalar) {
 		x *= scalar;
 		y *= scalar;
 	}
 	
-	public void divide(double scalar) {
-		this.multiply(1.0 / scalar);
-	}
-	
-	public double magnitude() {
+	private double magnitude() {
 		return Math.sqrt((x * x) + (y * y));
 	}
 	
-	public Vector2D normalise() {
+	Vector2D normalise() {
 		double inverseMagnitude = 1.0 / this.magnitude();
 		
 		return new Vector2D(x * inverseMagnitude, y * inverseMagnitude);
 	}
 	
-	public Vector2D perpendicular() {
+	Vector2D perpendicular() {
 		return new Vector2D(y * -1.0, x);
 	}
 	

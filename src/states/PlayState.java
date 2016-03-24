@@ -30,7 +30,7 @@ import polysprite.SmallMeteor;
  *
  * @author Michael Topsom
  */
-public class PlayState implements State {
+class PlayState implements State {
 	private boolean initialised = false;
 	private boolean justLoaded;
 	

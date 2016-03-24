@@ -9,12 +9,12 @@ import collision.Vector2D;
  *
  * @author Michael Topsom
  */
-public class ExplosionPiece extends PolySprite {
+class ExplosionPiece extends PolySprite {
 	private ArrayList<Vector2D[]> explosionPieceImages;
 	
 	private int alive = 50;
 	
-	public ExplosionPiece(Vector2D position) {
+	ExplosionPiece(Vector2D position) {
 		super();
 		
 		explosionPieceImages = new ArrayList<>();
@@ -29,7 +29,7 @@ public class ExplosionPiece extends PolySprite {
 		initialise(explosionPieceImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1, explosionPieceImages);
 	}
 	
-	public void update() {
+	void update() {
 		this.update(0.0, 2.0);
 		
 		alive--;
@@ -40,7 +40,7 @@ public class ExplosionPiece extends PolySprite {
 		render(g2d, alive / 50.0f);
 	}
 	
-	public boolean kill() {
+	boolean kill() {
 		return alive < 0;
 	}
 }
