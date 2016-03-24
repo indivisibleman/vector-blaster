@@ -257,10 +257,6 @@ class MenuState implements State {
 	}
 	
 	@Override
-	public void resume() {
-	}
-	
-	@Override
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()) {
 			case KeyEvent.VK_UP:

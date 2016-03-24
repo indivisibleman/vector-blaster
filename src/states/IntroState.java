@@ -174,10 +174,6 @@ public class IntroState implements State {
 	}
 	
 	@Override
-	public void resume() {
-	}
-	
-	@Override
 	public void keyPressed(KeyEvent e) {
 	}
 	

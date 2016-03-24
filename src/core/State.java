@@ -14,8 +14,8 @@ public interface State {
 	public boolean justLoaded();
 	public void update();
 	public void render(Graphics g);
-	public void resume();
 	public void keyPressed(KeyEvent e);
 	public void keyReleased(KeyEvent e);
 	public void cleanUp();
+	default void resume() {};
 }

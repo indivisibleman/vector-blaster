@@ -179,10 +179,6 @@ class PauseState implements State {
 	}
 	
 	@Override
-	public void resume() {
-	}
-	
-	@Override
 	public void keyPressed(KeyEvent e) {
 	}
 	
