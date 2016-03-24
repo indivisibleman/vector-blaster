@@ -144,7 +144,7 @@ public class PolySprite {
 		
 		spin += spinRate;
 		
-		if(thrust == 0.0) {
+		if(Double.doubleToRawLongBits(thrust) == 0) {
 			speed.multiply(0.99);
 		} else {
 			speed = new Vector2D(thrust * Math.cos(orientation), thrust * Math.sin(orientation));
