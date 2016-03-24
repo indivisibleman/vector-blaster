@@ -16,6 +16,7 @@ import core.Constants;
 import core.State;
 import core.StateManager;
 import core.Utilities;
+import core.exception.FontLoadException;
 import polysprite.LargeMeteor;
 import polysprite.MediumMeteor;
 import polysprite.PolySprite;
@@ -53,7 +54,7 @@ public class IntroState implements State {
 	private Logger log = Logger.getLogger(this.getClass().getName());
 	
 	@Override
-	public void initialise() {
+	public void initialise() throws FontLoadException {
 		log.log(Level.INFO, "IntroState - initialising.");
 		
 		stateManager = StateManager.getInstance();
@@ -90,7 +91,7 @@ public class IntroState implements State {
 	}
 	
 	@Override
-	public void initialise(String arg) {
+	public void initialise(String arg) throws FontLoadException {
 		log.log(Level.INFO, "IntroState - initialising with arguments.");
 		
 		initialise();

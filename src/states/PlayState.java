@@ -15,6 +15,7 @@ import collision.Polygon2D;
 import collision.Vector2D;
 import core.Constants;
 import core.Constants.MeteorType;
+import core.exception.FontLoadException;
 import core.State;
 import core.StateManager;
 import core.Utilities;
@@ -91,7 +92,7 @@ class PlayState implements State {
 	private Logger log = Logger.getLogger(this.getClass().getName());
 	
 	@Override
-	public void initialise() {
+	public void initialise()  throws FontLoadException {
 		log.log(Level.INFO, "PlayState - initialising.");
 		
 		stateManager = StateManager.getInstance();
@@ -125,7 +126,7 @@ class PlayState implements State {
 	}
 	
 	@Override
-	public void initialise(String arg) {
+	public void initialise(String arg) throws FontLoadException {
 		log.log(Level.INFO, "PlayState - initialising with arguments.");
 		
 		initialise();

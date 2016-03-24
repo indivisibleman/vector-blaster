@@ -1,6 +1,10 @@
 package core;
 
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import core.exception.FontLoadException;
 
 /**
  *
@@ -10,6 +14,8 @@ public class StateManager {
 	private static StateManager instance;
 	
 	private Vector<State> states = new Vector<>();
+	
+	private Logger log = Logger.getLogger(this.getClass().getName());
 	
 	private StateManager() {
 	}
@@ -28,7 +34,12 @@ public class StateManager {
 		State temp = states.lastElement();
 		
 		if(!temp.initialised()) {
-			temp.initialise();
+			try {
+				temp.initialise();
+			} catch(FontLoadException fle) {
+				log.log(Level.SEVERE, "Unable to initialise", fle);
+				popAll();
+			}
 		}
 	}
 	
@@ -45,7 +56,12 @@ public class StateManager {
 		State temp = states.lastElement();
 		
 		if(!temp.initialised()) {
-			temp.initialise();
+			try {
+				temp.initialise();
+			} catch(FontLoadException fle) {
+				log.log(Level.SEVERE, "Unable to initialise", fle);
+				popAll();
+			}
 		}
 	}
 	
@@ -62,7 +78,12 @@ public class StateManager {
 		State temp = states.lastElement();
 		
 		if(!temp.initialised()) {
-			temp.initialise(args);
+			try {
+				temp.initialise(args);
+			} catch(FontLoadException fle) {
+				log.log(Level.SEVERE, "Unable to initialise", fle);
+				popAll();
+			}
 		}
 	}
 	

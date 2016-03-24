@@ -16,6 +16,7 @@ import core.Constants;
 import core.State;
 import core.StateManager;
 import core.Utilities;
+import core.exception.FontLoadException;
 import polysprite.LargeMeteor;
 import polysprite.MediumMeteor;
 import polysprite.PolySprite;
@@ -62,7 +63,7 @@ class MenuState implements State {
 	private Logger log = Logger.getLogger(this.getClass().getName());
 	
 	@Override
-	public void initialise() {
+	public void initialise() throws FontLoadException {
 		log.log(Level.INFO, "MenuState - initialising.");
 		
 		stateManager = StateManager.getInstance();
@@ -115,7 +116,7 @@ class MenuState implements State {
 	}
 	
 	@Override
-	public void initialise(String arg) {
+	public void initialise(String arg) throws FontLoadException {
 		log.log(Level.INFO, "MenuState - initialising with arguments.");
 		
 		initialise();

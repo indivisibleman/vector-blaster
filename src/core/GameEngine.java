@@ -82,10 +82,11 @@ class GameEngine implements Runnable, KeyListener {
 			while(accumulator >= constants.getTimeStep()) {
 				accumulator -= constants.getTimeStep();
 				
+				if(!stateManager.isEmpty() && stateManager.currentState().justLoaded()) {
+					accumulator = 0.0f;
+				}
+				
 				if(!stateManager.isEmpty()) {
-					if(stateManager.currentState().justLoaded()) {
-						accumulator = 0.0f;
-					}
 					window.requestFocus();
 					stateManager.currentState().update();
 				} else {

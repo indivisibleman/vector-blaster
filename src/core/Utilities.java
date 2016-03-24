@@ -7,6 +7,8 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import core.exception.FontLoadException;
+
 /**
  *
  * @author Michael Topsom
@@ -27,19 +29,17 @@ public class Utilities {
 		return instance;
 	}
 	
-	public Font getFont(String filename) {
+	public Font getFont(String filename) throws FontLoadException {
 		try {
 			URL url = getClass().getResource("fonts/" + filename);
 			InputStream in = url.openStream();
 			return Font.createFont(Font.TRUETYPE_FONT, in);
 		} catch(IOException ioe) {
 			log.log(Level.SEVERE, "Font: " + filename + " was not loaded", ioe);
-			System.exit(4);
+			throw new FontLoadException(ioe.getMessage());
 		} catch(Exception e) {
 			log.log(Level.SEVERE, "Other exception: " + e.toString() + " while loading font.", e);
-			System.exit(5);
+			throw new FontLoadException(e.getMessage());
 		}
-		
-		return null;
 	}
 }
