@@ -1,6 +1,6 @@
 package core;
 
-import java.util.Vector;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,7 +13,7 @@ import core.exception.FontLoadException;
 public class StateManager {
 	private static StateManager instance;
 	
-	private Vector<State> states = new Vector<>();
+	private ArrayList<State> states = new ArrayList<>();
 	
 	private Logger log = Logger.getLogger(this.getClass().getName());
 	
@@ -31,7 +31,7 @@ public class StateManager {
 	public void push(State state) {
 		states.add(state);
 		
-		State temp = states.lastElement();
+		State temp = states.get(states.size() - 1);
 		
 		if(!temp.initialised()) {
 			try {
@@ -45,15 +45,15 @@ public class StateManager {
 	
 	public void changeState(State state) {
 		if(!states.isEmpty()) {
-			State temp = states.elementAt(states.size() - 1);
+			State temp = states.get(states.size() - 1);
 			temp.cleanUp();
 			
-			states.removeElementAt(states.size() - 1);
+			states.remove(states.size() - 1);
 		}
 		
 		states.add(state);
 		
-		State temp = states.lastElement();
+		State temp = states.get(states.size() - 1);
 		
 		if(!temp.initialised()) {
 			try {
@@ -67,15 +67,15 @@ public class StateManager {
 	
 	public void changeState(State state, String args) {
 		if(!states.isEmpty()) {
-			State temp = states.elementAt(states.size() - 1);
+			State temp = states.get(states.size() - 1);
 			temp.cleanUp();
 			
-			states.removeElementAt(states.size() - 1);
+			states.remove(states.size() - 1);
 		}
 		
 		states.add(state);
 		
-		State temp = states.lastElement();
+		State temp = states.get(states.size() - 1);
 		
 		if(!temp.initialised()) {
 			try {
@@ -89,30 +89,30 @@ public class StateManager {
 	
 	public void pop() {
 		if(!states.isEmpty()) {
-			State temp = states.elementAt(states.size() - 1);
+			State temp = states.get(states.size() - 1);
 			temp.cleanUp();
 			
-			states.removeElementAt(states.size() - 1);
+			states.remove(states.size() - 1);
 		}
 		
 		if(!states.isEmpty()) {
-			State temp = states.lastElement();
+			State temp = states.get(states.size() - 1);
 			temp.resume();
 		}
 	}
 	
 	public void popAll() {
 		while(!states.isEmpty()) {
-			State temp = states.elementAt(states.size() - 1);
+			State temp = states.get(states.size() - 1);
 			temp.cleanUp();
 			
-			states.removeElementAt(states.size() - 1);
+			states.remove(states.size() - 1);
 		}
 	}
 	
 	State currentState() {
 		if(!states.isEmpty()) {
-			return states.lastElement();
+			return states.get(states.size() - 1);
 		} else {
 			return null;
 		}
