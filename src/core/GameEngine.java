@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 
@@ -35,6 +37,8 @@ class GameEngine implements Runnable, KeyListener {
 	private StateManager stateManager;
 	
 	private Constants constants;
+	
+	private Logger log = Logger.getLogger(this.getClass().getName());
 	
 	public GameEngine() {
 		initialise();
@@ -98,7 +102,7 @@ class GameEngine implements Runnable, KeyListener {
 			render();
 		}
 		
-		System.out.println("Exiting normally.");
+		log.log(Level.INFO, "Exiting normally.");
 		System.exit(1);
 	}
 	

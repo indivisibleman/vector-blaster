@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import collision.Vector2D;
 import core.Constants;
@@ -48,9 +50,11 @@ class HelpState implements State {
 	
 	private Constants constants;
 	
+	private Logger log = Logger.getLogger(this.getClass().getName());
+	
 	@Override
 	public void initialise() {
-		System.out.println("HelpState - initialising.");
+		log.log(Level.INFO, "HelpState - initialising.");
 		
 		stateManager = StateManager.getInstance();
 		
@@ -87,7 +91,7 @@ class HelpState implements State {
 	
 	@Override
 	public void initialise(String arg) {
-		System.out.println("HelpState - initialising with arguments.");
+		log.log(Level.INFO, "HelpState - initialising with arguments.");
 		
 		initialise();
 	}
@@ -186,6 +190,6 @@ class HelpState implements State {
 	
 	@Override
 	public void cleanUp() {
-		System.out.println("HelpState - cleaning up.");
+		log.log(Level.INFO, "HelpState - cleaning up.");
 	}
 }

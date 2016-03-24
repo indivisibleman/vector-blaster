@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import collision.Vector2D;
 import core.Constants;
@@ -50,9 +52,11 @@ class PauseState implements State {
 	
 	private int wait;
 	
+	private Logger log = Logger.getLogger(this.getClass().getName());
+	
 	@Override
 	public void initialise() {
-		System.out.println("PauseState - initialising.");
+		log.log(Level.INFO, "PauseState - initialising.");
 		
 		stateManager = StateManager.getInstance();
 		
@@ -91,7 +95,7 @@ class PauseState implements State {
 	
 	@Override
 	public void initialise(String arg) {
-		System.out.println("PauseState - initialising with arguments.");
+		log.log(Level.INFO, "PauseState - initialising with arguments.");
 		
 		initialise();
 	}
@@ -191,6 +195,6 @@ class PauseState implements State {
 	
 	@Override
 	public void cleanUp() {
-		System.out.println("PauseState - cleaning up.");
+		log.log(Level.INFO, "PauseState - cleaning up.");
 	}
 }

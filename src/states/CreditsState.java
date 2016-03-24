@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import collision.Vector2D;
 import core.Constants;
@@ -48,9 +50,11 @@ class CreditsState implements State {
 	
 	private Constants constants;
 	
+	private Logger log = Logger.getLogger(this.getClass().getName());
+	
 	@Override
 	public void initialise() {
-		System.out.println("CreditsState - initialising.");
+		log.log(Level.INFO, "CreditsState - initialising.");
 		
 		stateManager = StateManager.getInstance();
 		
@@ -87,7 +91,7 @@ class CreditsState implements State {
 	
 	@Override
 	public void initialise(String arg) {
-		System.out.println("CreditsState - initialising with arguments.");
+		log.log(Level.INFO, "CreditsState - initialising with arguments.");
 		
 		initialise();
 	}
@@ -185,6 +189,6 @@ class CreditsState implements State {
 	
 	@Override
 	public void cleanUp() {
-		System.out.println("CreditsState - cleaning up.");
+		log.log(Level.INFO, "CreditsState - cleaning up.");
 	}
 }

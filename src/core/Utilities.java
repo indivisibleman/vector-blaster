@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -11,6 +13,8 @@ import java.net.URL;
  */
 public class Utilities {
 	private static Utilities instance;
+	
+	private Logger log = Logger.getLogger(this.getClass().getName());
 	
 	private Utilities() {
 	}
@@ -28,11 +32,11 @@ public class Utilities {
 			URL url = getClass().getResource("fonts/" + filename);
 			InputStream in = url.openStream();
 			return Font.createFont(Font.TRUETYPE_FONT, in);
-		} catch(IOException e) {
-			System.out.println("Font: " + filename + " was not loaded because: " + e.toString());
+		} catch(IOException ioe) {
+			log.log(Level.SEVERE, "Font: " + filename + " was not loaded", ioe);
 			System.exit(4);
 		} catch(Exception e) {
-			System.out.println("Other exception: " + e.toString() + " while loading font: " + filename);
+			log.log(Level.SEVERE, "Other exception: " + e.toString() + " while loading font.", e);
 			System.exit(5);
 		}
 		

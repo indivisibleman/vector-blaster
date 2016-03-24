@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import collision.Polygon2D;
 import collision.Vector2D;
@@ -86,9 +88,11 @@ class PlayState implements State {
 	
 	private HyperIndicator hyperIndicator;
 	
+	private Logger log = Logger.getLogger(this.getClass().getName());
+	
 	@Override
 	public void initialise() {
-		System.out.println("PlayState - initialising.");
+		log.log(Level.INFO, "PlayState - initialising.");
 		
 		stateManager = StateManager.getInstance();
 		
@@ -122,7 +126,7 @@ class PlayState implements State {
 	
 	@Override
 	public void initialise(String arg) {
-		System.out.println("PlayState - initialising with arguments.");
+		log.log(Level.INFO, "PlayState - initialising with arguments.");
 		
 		initialise();
 	}
@@ -450,6 +454,6 @@ class PlayState implements State {
 	
 	@Override
 	public void cleanUp() {
-		System.out.println("PlayState - cleaning up.");
+		log.log(Level.INFO, "PlayState - cleaning up.");
 	}
 }

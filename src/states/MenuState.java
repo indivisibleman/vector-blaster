@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import collision.Vector2D;
 import core.Constants;
@@ -57,9 +59,11 @@ class MenuState implements State {
 	private int choice;
 	private int choiceCooldown;
 	
+	private Logger log = Logger.getLogger(this.getClass().getName());
+	
 	@Override
 	public void initialise() {
-		System.out.println("MenuState - initialising.");
+		log.log(Level.INFO, "MenuState - initialising.");
 		
 		stateManager = StateManager.getInstance();
 		
@@ -112,7 +116,7 @@ class MenuState implements State {
 	
 	@Override
 	public void initialise(String arg) {
-		System.out.println("MenuState - initialising with arguments.");
+		log.log(Level.INFO, "MenuState - initialising with arguments.");
 		
 		initialise();
 	}
@@ -296,6 +300,6 @@ class MenuState implements State {
 	
 	@Override
 	public void cleanUp() {
-		System.out.println("MenuState - cleaning up.");
+		log.log(Level.INFO, "MenuState - cleaning up.");
 	}
 }

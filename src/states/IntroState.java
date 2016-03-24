@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import collision.Vector2D;
 import core.Constants;
@@ -48,9 +50,11 @@ public class IntroState implements State {
 	
 	private Constants constants;
 	
+	private Logger log = Logger.getLogger(this.getClass().getName());
+	
 	@Override
 	public void initialise() {
-		System.out.println("IntroState - initialising.");
+		log.log(Level.INFO, "IntroState - initialising.");
 		
 		stateManager = StateManager.getInstance();
 		
@@ -87,7 +91,7 @@ public class IntroState implements State {
 	
 	@Override
 	public void initialise(String arg) {
-		System.out.println("IntroState - initialising with arguments.");
+		log.log(Level.INFO, "IntroState - initialising with arguments.");
 		
 		initialise();
 	}
@@ -184,6 +188,6 @@ public class IntroState implements State {
 	
 	@Override
 	public void cleanUp() {
-		System.out.println("IntroState - cleaning up.");
+		log.log(Level.INFO, "IntroState - cleaning up.");
 	}
 }
