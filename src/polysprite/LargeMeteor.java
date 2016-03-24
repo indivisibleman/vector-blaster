@@ -50,7 +50,7 @@ public class LargeMeteor extends PolySprite {
 		
 		largeMeteorColliders.add(pointsInCollidersFive);
 		
-		initialise(largeMeteorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1, largeMeteorColliders,
+		initialise(largeMeteorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1,
 				MeteorType.LARGE);
 	}
 }

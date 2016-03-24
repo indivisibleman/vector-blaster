@@ -35,7 +35,7 @@ public class SmallMeteor extends PolySprite {
 		
 		smallMeteorColliders.add(pointsInCollidersTwo);
 		
-		initialise(smallMeteorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1, smallMeteorColliders,
+		initialise(smallMeteorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1,
 				MeteorType.SMALL);
 	}
 	

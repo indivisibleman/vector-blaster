@@ -26,7 +26,7 @@ class ExplosionPiece extends PolySprite {
 		explosionPieceImages.add(pointsIn);
 		;
 		
-		initialise(explosionPieceImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1, explosionPieceImages);
+		initialise(explosionPieceImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1);
 	}
 	
 	void update() {

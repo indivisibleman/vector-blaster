@@ -44,7 +44,7 @@ public class MediumMeteor extends PolySprite {
 		
 		mediumMeteorColliders.add(pointsInCollidersFour);
 		
-		initialise(mediumMeteorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1, mediumMeteorColliders,
+		initialise(mediumMeteorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1,
 				MeteorType.MEDIUM);
 	}
 }

@@ -26,7 +26,7 @@ public class Ship extends PolySprite {
 		
 		shipColliders.add(pointsIn);
 		
-		initialise(shipImages, position, 0.0, 0.0, shipColliders);
+		initialise(shipImages, position, 0.0, 0.0);
 	}
 	
 	public double getOrientation() {

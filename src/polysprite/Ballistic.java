@@ -36,7 +36,7 @@ public class Ballistic extends PolySprite {
 		
 		ballisticColliders.add(pointsIn);
 		
-		initialise(ballisticImages, position, orientation, 0.0, ballisticColliders);
+		initialise(ballisticImages, position, orientation, 0.0);
 	}
 	
 	public void update() {

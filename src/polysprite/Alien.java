@@ -44,7 +44,7 @@ public class Alien extends PolySprite {
 		
 		alienColliders.add(pointsIn);
 		
-		initialise(alienImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1, alienColliders, MeteorType.ALIEN);
+		initialise(alienImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1, MeteorType.ALIEN);
 		
 		colour = Color.GREEN;
 	}

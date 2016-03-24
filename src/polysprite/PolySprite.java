@@ -53,8 +53,8 @@ public class PolySprite {
 		type = MeteorType.DEFAULT;
 	}
 	
-	void initialise(List<Vector2D[]> polyImages, Vector2D position, double orientation, double spinRate, List<Vector2D[]> polyColliders, MeteorType type) {
-		initialise(polyImages, position, orientation, spinRate, polyColliders);
+	void initialise(List<Vector2D[]> polyImages, Vector2D position, double orientation, double spinRate, MeteorType type) {
+		initialise(polyImages, position, orientation, spinRate);
 		
 		this.type = type;
 	}
@@ -67,7 +67,7 @@ public class PolySprite {
 		this.position = position;
 	}
 	
-	void initialise(List<Vector2D[]> polyImages, Vector2D position, double orientation, double spinRate, List<Vector2D[]> polyColliders) {
+	void initialise(List<Vector2D[]> polyImages, Vector2D position, double orientation, double spinRate) {
 		this.polyImages = polyImages;
 		
 		this.position = position;

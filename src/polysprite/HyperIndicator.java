@@ -28,7 +28,7 @@ public class HyperIndicator extends PolySprite {
 		
 		hyperIndicatorImages.add(pointsIn);
 		
-		initialise(hyperIndicatorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, 0.05, hyperIndicatorImages);
+		initialise(hyperIndicatorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, 0.05);
 	}
 	
 	@Override
