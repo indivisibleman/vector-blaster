@@ -2,7 +2,7 @@ package polysprite;
 
 import java.util.ArrayList;
 
-import collision.Vector2D;
+import collision.Vector;
 import core.Constants.MeteorType;
 
 /**
@@ -10,37 +10,37 @@ import core.Constants.MeteorType;
  * @author Michael Topsom
  */
 public class MediumMeteor extends PolySprite {
-	private ArrayList<Vector2D[]> mediumMeteorImages;
+	private ArrayList<Vector[]> mediumMeteorImages;
 	
-	private ArrayList<Vector2D[]> mediumMeteorColliders;
+	private ArrayList<Vector[]> mediumMeteorColliders;
 	
-	public MediumMeteor(Vector2D position) {
+	public MediumMeteor(Vector position) {
 		super();
 		
 		mediumMeteorImages = new ArrayList<>();
 		
-		Vector2D[] pointsIn = { new Vector2D(2.0, 10.0), new Vector2D(7.0, 10.0), new Vector2D(13.0, 7.0), new Vector2D(14.0, -1.0), new Vector2D(10.0, -5.0),
-				new Vector2D(11.0, -12.0), new Vector2D(4.0, -14.0), new Vector2D(-2.0, -12.0), new Vector2D(-7.0, -14.0), new Vector2D(-13.0, -7.0), new Vector2D(-12.0, -2.0),
-				new Vector2D(-14.0, 0.0), new Vector2D(-13.0, 9.0), new Vector2D(-6.0, 15.0), new Vector2D(-1.0, 13.0) };
+		Vector[] pointsIn = { new Vector(2.0, 10.0), new Vector(7.0, 10.0), new Vector(13.0, 7.0), new Vector(14.0, -1.0), new Vector(10.0, -5.0),
+				new Vector(11.0, -12.0), new Vector(4.0, -14.0), new Vector(-2.0, -12.0), new Vector(-7.0, -14.0), new Vector(-13.0, -7.0), new Vector(-12.0, -2.0),
+				new Vector(-14.0, 0.0), new Vector(-13.0, 9.0), new Vector(-6.0, 15.0), new Vector(-1.0, 13.0) };
 		
 		mediumMeteorImages.add(pointsIn);
 		
 		mediumMeteorColliders = new ArrayList<>();
 		
-		Vector2D[] pointsInCollidersOne = { new Vector2D(2.0, 10.0), new Vector2D(7.0, 10.0), new Vector2D(13.0, 7.0), new Vector2D(14.0, -1.0), new Vector2D(10.0, -5.0) };
+		Vector[] pointsInCollidersOne = { new Vector(2.0, 10.0), new Vector(7.0, 10.0), new Vector(13.0, 7.0), new Vector(14.0, -1.0), new Vector(10.0, -5.0) };
 		
 		mediumMeteorColliders.add(pointsInCollidersOne);
 		
-		Vector2D[] pointsInCollidersTwo = { new Vector2D(10.0, -5.0), new Vector2D(11.0, -12.0), new Vector2D(4.0, -14.0), new Vector2D(-2.0, -12.0) };
+		Vector[] pointsInCollidersTwo = { new Vector(10.0, -5.0), new Vector(11.0, -12.0), new Vector(4.0, -14.0), new Vector(-2.0, -12.0) };
 		
 		mediumMeteorColliders.add(pointsInCollidersTwo);
 		
-		Vector2D[] pointsInCollidersThree = { new Vector2D(-2.0, -12.0), new Vector2D(-7.0, -14.0), new Vector2D(-13.0, -7.0), new Vector2D(-12.0, -2.0) };
+		Vector[] pointsInCollidersThree = { new Vector(-2.0, -12.0), new Vector(-7.0, -14.0), new Vector(-13.0, -7.0), new Vector(-12.0, -2.0) };
 		
 		mediumMeteorColliders.add(pointsInCollidersThree);
 		
-		Vector2D[] pointsInCollidersFour = { new Vector2D(2.0, 10.0), new Vector2D(10.0, -5.0), new Vector2D(-2.0, -12.0), new Vector2D(-12.0, -2.0), new Vector2D(-14.0, 0.0),
-				new Vector2D(-13.0, 9.0), new Vector2D(-6.0, 15.0), new Vector2D(-1.0, 13.0) };
+		Vector[] pointsInCollidersFour = { new Vector(2.0, 10.0), new Vector(10.0, -5.0), new Vector(-2.0, -12.0), new Vector(-12.0, -2.0), new Vector(-14.0, 0.0),
+				new Vector(-13.0, 9.0), new Vector(-6.0, 15.0), new Vector(-1.0, 13.0) };
 		
 		mediumMeteorColliders.add(pointsInCollidersFour);
 		

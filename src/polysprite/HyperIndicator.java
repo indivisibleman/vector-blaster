@@ -6,24 +6,24 @@ import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 
-import collision.Vector2D;
+import collision.Vector;
 
 /**
  *
  * @author Michael Topsom
  */
 public class HyperIndicator extends PolySprite {
-	private ArrayList<Vector2D[]> hyperIndicatorImages;
+	private ArrayList<Vector[]> hyperIndicatorImages;
 	
-	public HyperIndicator(Vector2D position) {
+	public HyperIndicator(Vector position) {
 		super();
 		
 		hyperIndicatorImages = new ArrayList<>();
 		
-		Vector2D[] pointsIn = new Vector2D[20];
+		Vector[] pointsIn = new Vector[20];
 		
 		for(int i = 0; i < 20; i++) {
-			pointsIn[i] = new Vector2D(i * Math.sin(i), i * Math.cos(i));
+			pointsIn[i] = new Vector(i * Math.sin(i), i * Math.cos(i));
 		}
 		
 		hyperIndicatorImages.add(pointsIn);
@@ -34,10 +34,10 @@ public class HyperIndicator extends PolySprite {
 	@Override
 	public void render(Graphics2D g2d, float alpha) {
 		for(int i = 0; i < polyImages.size(); i++) {
-			modifiedShape = new Vector2D[polyImages.get(i).length];
+			modifiedShape = new Vector[polyImages.get(i).length];
 			
 			for(int j = 0; j < polyImages.get(i).length; j++) {
-				modifiedShape[j] = new Vector2D(polyImages.get(i)[j].getX() * Math.cos(orientation + spin) - polyImages.get(i)[j].getY() * Math.sin(orientation + spin),
+				modifiedShape[j] = new Vector(polyImages.get(i)[j].getX() * Math.cos(orientation + spin) - polyImages.get(i)[j].getY() * Math.sin(orientation + spin),
 						polyImages.get(i)[j].getY() * Math.cos(orientation + spin) + polyImages.get(i)[j].getX() * Math.sin(orientation + spin));
 				modifiedShape[j].add(position);
 			}

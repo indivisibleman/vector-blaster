@@ -5,24 +5,24 @@ package collision;
  * @author Michael Topsom
  */
 public class Polygon2D {
-	private Vector2D[] points;
-	private Vector2D[] edges;
+	private Vector[] points;
+	private Vector[] edges;
 	
 	private int length;
 	
-	public Polygon2D(Vector2D[] points) {
+	public Polygon2D(Vector[] points) {
 		this.points = points;
 		
-		edges = new Vector2D[points.length];
+		edges = new Vector[points.length];
 		
 		for(int i = 0; i < points.length; i++) {
-			edges[i] = new Vector2D(points[(i + 1) % points.length].getX() - points[i].getX(), points[(i + 1) % points.length].getY() - points[i].getY());
+			edges[i] = new Vector(points[(i + 1) % points.length].getX() - points[i].getX(), points[(i + 1) % points.length].getY() - points[i].getY());
 		}
 		
 		length = points.length;
 	}
 	
-	private Projection projectToAxis(Vector2D vector) {
+	private Projection projectToAxis(Vector vector) {
 		double min = Double.POSITIVE_INFINITY;
 		double max = Double.NEGATIVE_INFINITY;
 		
@@ -40,12 +40,12 @@ public class Polygon2D {
 	}
 	
 	public boolean intersects(Polygon2D polygon) {
-		Vector2D[] combinedEdges = new Vector2D[polygon.length + length];
+		Vector[] combinedEdges = new Vector[polygon.length + length];
 		
 		System.arraycopy(edges, 0, combinedEdges, 0, edges.length);
 		System.arraycopy(polygon.edges, 0, combinedEdges, length, polygon.length);
 		
-		Vector2D axis;
+		Vector axis;
 		Projection a;
 		Projection b;
 		

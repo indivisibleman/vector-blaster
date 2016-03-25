@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import collision.Vector2D;
+import collision.Vector;
 import core.Constants;
 import core.State;
 import core.StateManager;
@@ -71,17 +71,17 @@ public class IntroState implements State {
 		
 		for(int i = 0; i < 9; i++) {
 			meteors.add(
-					new SmallMeteor(new Vector2D(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble())));
+					new SmallMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 		
 		for(int i = 0; i < 6; i++) {
 			meteors.add(
-					new MediumMeteor(new Vector2D(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble())));
+					new MediumMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 		
 		for(int i = 0; i < 3; i++) {
 			meteors.add(
-					new LargeMeteor(new Vector2D(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble())));
+					new LargeMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 		
 		fadeIn = true;

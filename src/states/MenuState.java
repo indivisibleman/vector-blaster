@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import collision.Vector2D;
+import collision.Vector;
 import core.Constants;
 import core.State;
 import core.StateManager;
@@ -90,23 +90,23 @@ class MenuState implements State {
 		
 		for(int i = 0; i < 9; i++) {
 			meteors.add(
-					new SmallMeteor(new Vector2D(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble())));
+					new SmallMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 		
 		for(int i = 0; i < 6; i++) {
 			meteors.add(
-					new MediumMeteor(new Vector2D(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble())));
+					new MediumMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 		
 		for(int i = 0; i < 3; i++) {
 			meteors.add(
-					new LargeMeteor(new Vector2D(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble())));
+					new LargeMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 		
 		choiceMarkers = new ArrayList<>();
 		
-		choiceMarkers.add(new SmallMeteor(new Vector2D(0.0, 0.0)));
-		choiceMarkers.add(new SmallMeteor(new Vector2D(0.0, 0.0)));
+		choiceMarkers.add(new SmallMeteor(new Vector(0.0, 0.0)));
+		choiceMarkers.add(new SmallMeteor(new Vector(0.0, 0.0)));
 		
 		fadeIn = true;
 		fadeOut = false;
@@ -248,9 +248,9 @@ class MenuState implements State {
 		}
 		
 		choiceMarkers.get(0)
-				.setPosition(new Vector2D((constants.getWindowSize().width - g2d.getFontMetrics().stringWidth(menuOptions[choice])) / 2.0f - 20.0f, 200.0f + 50 * choice));
+				.setPosition(new Vector((constants.getWindowSize().width - g2d.getFontMetrics().stringWidth(menuOptions[choice])) / 2.0f - 20.0f, 200.0f + 50 * choice));
 		choiceMarkers.get(1)
-				.setPosition(new Vector2D((constants.getWindowSize().width + g2d.getFontMetrics().stringWidth(menuOptions[choice])) / 2.0f + 20.0f, 200.0f + 50 * choice));
+				.setPosition(new Vector((constants.getWindowSize().width + g2d.getFontMetrics().stringWidth(menuOptions[choice])) / 2.0f + 20.0f, 200.0f + 50 * choice));
 		
 		for(int i = 0; i < choiceMarkers.size(); i++) {
 			choiceMarkers.get(i).render(g2d);

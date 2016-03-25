@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import collision.Vector2D;
+import collision.Vector;
 import core.Constants;
 import core.Constants.MeteorType;
 
@@ -18,30 +18,30 @@ import core.Constants.MeteorType;
  * @author Michael Topsom
  */
 public class PolySprite {
-	protected List<Vector2D[]> polyImages;
+	protected List<Vector[]> polyImages;
 	
 	protected GeneralPath poly;
 	
 	protected Color colour;
-	private Vector2D pos;
+	private Vector pos;
 	protected float lineThickness;
 	
 	private double colliderRadius;
 	
-	private List<Vector2D[]> polyCollidersOut;
+	private List<Vector[]> polyCollidersOut;
 	
-	private List<Vector2D> positions;
-	private Iterator<Vector2D> positionIterator;
+	private List<Vector> positions;
+	private Iterator<Vector> positionIterator;
 	
-	protected Vector2D position;
-	private Vector2D speed;
+	protected Vector position;
+	private Vector speed;
 	
 	protected double orientation;
 	
 	protected double spin;
 	private double spinRate;
 	
-	protected Vector2D[] modifiedShape;
+	protected Vector[] modifiedShape;
 	
 	protected Constants constants;
 	
@@ -53,7 +53,7 @@ public class PolySprite {
 		type = MeteorType.DEFAULT;
 	}
 	
-	void initialise(List<Vector2D[]> polyImages, Vector2D position, double orientation, double spinRate, MeteorType type) {
+	void initialise(List<Vector[]> polyImages, Vector position, double orientation, double spinRate, MeteorType type) {
 		initialise(polyImages, position, orientation, spinRate);
 		
 		this.type = type;
@@ -63,11 +63,11 @@ public class PolySprite {
 		return type;
 	}
 	
-	public void setPosition(Vector2D position) {
+	public void setPosition(Vector position) {
 		this.position = position;
 	}
 	
-	void initialise(List<Vector2D[]> polyImages, Vector2D position, double orientation, double spinRate) {
+	void initialise(List<Vector[]> polyImages, Vector position, double orientation, double spinRate) {
 		this.polyImages = polyImages;
 		
 		this.position = position;
@@ -75,7 +75,7 @@ public class PolySprite {
 		this.spinRate = spinRate;
 		spin = 0.0;
 		
-		speed = new Vector2D(0.0, 0.0);
+		speed = new Vector(0.0, 0.0);
 		
 		positions = new ArrayList<>();
 		polyCollidersOut = new ArrayList<>();
@@ -107,10 +107,10 @@ public class PolySprite {
 			pos = positionIterator.next();
 			
 			for(int i = 0; i < polyImages.size(); i++) {
-				modifiedShape = new Vector2D[polyImages.get(i).length];
+				modifiedShape = new Vector[polyImages.get(i).length];
 				
 				for(int j = 0; j < polyImages.get(i).length; j++) {
-					modifiedShape[j] = new Vector2D(polyImages.get(i)[j].getX() * Math.cos(orientation + spin) - polyImages.get(i)[j].getY() * Math.sin(orientation + spin),
+					modifiedShape[j] = new Vector(polyImages.get(i)[j].getX() * Math.cos(orientation + spin) - polyImages.get(i)[j].getY() * Math.sin(orientation + spin),
 							polyImages.get(i)[j].getY() * Math.cos(orientation + spin) + polyImages.get(i)[j].getX() * Math.sin(orientation + spin));
 					modifiedShape[j].add(pos);
 				}
@@ -147,7 +147,7 @@ public class PolySprite {
 		if(Double.doubleToRawLongBits(thrust) == 0) {
 			speed.multiply(0.99);
 		} else {
-			speed = new Vector2D(thrust * Math.cos(orientation), thrust * Math.sin(orientation));
+			speed = new Vector(thrust * Math.cos(orientation), thrust * Math.sin(orientation));
 		}
 		
 		position.add(speed);
@@ -171,51 +171,51 @@ public class PolySprite {
 		return colliderRadius;
 	}
 	
-	public Vector2D getPosition() {
+	public Vector getPosition() {
 		return position;
 	}
 	
-	public List<Vector2D> getPositions() {
+	public List<Vector> getPositions() {
 		positions.clear();
 		
 		positions.add(position);
 		
 		if(position.getX() - this.getRadius() < 0.0) {
-			positions.add(new Vector2D(position.getX() + constants.getWindowSize().width, position.getY()));
+			positions.add(new Vector(position.getX() + constants.getWindowSize().width, position.getY()));
 			
 			if(position.getY() - this.getRadius() < 0.0) {
-				positions.add(new Vector2D(position.getX() + constants.getWindowSize().width, position.getY() + constants.getWindowSize().height));
+				positions.add(new Vector(position.getX() + constants.getWindowSize().width, position.getY() + constants.getWindowSize().height));
 			}
 			
 			if(position.getY() + this.getRadius() > constants.getWindowSize().height) {
-				positions.add(new Vector2D(position.getX() + constants.getWindowSize().width, position.getY() - constants.getWindowSize().height));
+				positions.add(new Vector(position.getX() + constants.getWindowSize().width, position.getY() - constants.getWindowSize().height));
 			}
 		}
 		
 		if(position.getX() + this.getRadius() > constants.getWindowSize().width) {
-			positions.add(new Vector2D(position.getX() - constants.getWindowSize().width, position.getY()));
+			positions.add(new Vector(position.getX() - constants.getWindowSize().width, position.getY()));
 			
 			if(position.getY() - this.getRadius() < 0.0) {
-				positions.add(new Vector2D(position.getX() - constants.getWindowSize().width, position.getY() + constants.getWindowSize().height));
+				positions.add(new Vector(position.getX() - constants.getWindowSize().width, position.getY() + constants.getWindowSize().height));
 			}
 			
 			if(position.getY() + this.getRadius() > constants.getWindowSize().height) {
-				positions.add(new Vector2D(position.getX() - constants.getWindowSize().width, position.getY() - constants.getWindowSize().height));
+				positions.add(new Vector(position.getX() - constants.getWindowSize().width, position.getY() - constants.getWindowSize().height));
 			}
 		}
 		
 		if(position.getY() - this.getRadius() < 0.0) {
-			positions.add(new Vector2D(position.getX(), position.getY() + constants.getWindowSize().height));
+			positions.add(new Vector(position.getX(), position.getY() + constants.getWindowSize().height));
 		}
 		
 		if(position.getY() + this.getRadius() > constants.getWindowSize().height) {
-			positions.add(new Vector2D(position.getX(), position.getY() - constants.getWindowSize().height));
+			positions.add(new Vector(position.getX(), position.getY() - constants.getWindowSize().height));
 		}
 		
 		return positions;
 	}
 	
-	public List<Vector2D[]> getColliders() {
+	public List<Vector[]> getColliders() {
 		polyCollidersOut.clear();
 		
 		positionIterator = positions.iterator();
@@ -224,10 +224,10 @@ public class PolySprite {
 			pos = positionIterator.next();
 			
 			for(int i = 0; i < polyImages.size(); i++) {
-				modifiedShape = new Vector2D[polyImages.get(i).length];
+				modifiedShape = new Vector[polyImages.get(i).length];
 				
 				for(int j = 0; j < polyImages.get(i).length; j++) {
-					modifiedShape[j] = new Vector2D(polyImages.get(i)[j].getX() * Math.cos(orientation + spin) - polyImages.get(i)[j].getY() * Math.sin(orientation + spin),
+					modifiedShape[j] = new Vector(polyImages.get(i)[j].getX() * Math.cos(orientation + spin) - polyImages.get(i)[j].getY() * Math.sin(orientation + spin),
 							polyImages.get(i)[j].getY() * Math.cos(orientation + spin) + polyImages.get(i)[j].getX() * Math.sin(orientation + spin));
 					modifiedShape[j].add(pos);
 				}

@@ -2,7 +2,7 @@ package polysprite;
 
 import java.util.ArrayList;
 
-import collision.Vector2D;
+import collision.Vector;
 import core.Constants.MeteorType;
 
 /**
@@ -10,28 +10,28 @@ import core.Constants.MeteorType;
  * @author Michael Topsom
  */
 public class SmallMeteor extends PolySprite {
-	private ArrayList<Vector2D[]> smallMeteorImages;
+	private ArrayList<Vector[]> smallMeteorImages;
 	
-	private ArrayList<Vector2D[]> smallMeteorColliders;
+	private ArrayList<Vector[]> smallMeteorColliders;
 	
-	public SmallMeteor(Vector2D position) {
+	public SmallMeteor(Vector position) {
 		super();
 		
 		smallMeteorImages = new ArrayList<>();
 		
-		Vector2D[] pointsIn = { new Vector2D(3.0, 8.0), new Vector2D(4.0, 5.0), new Vector2D(10.0, 3.0), new Vector2D(6.0, -7.0), new Vector2D(2.0, -6.0), new Vector2D(-1.0, -9.0),
-				new Vector2D(-8.0, -7.0), new Vector2D(-9.0, 2.0), new Vector2D(-4.0, 9.0) };
+		Vector[] pointsIn = { new Vector(3.0, 8.0), new Vector(4.0, 5.0), new Vector(10.0, 3.0), new Vector(6.0, -7.0), new Vector(2.0, -6.0), new Vector(-1.0, -9.0),
+				new Vector(-8.0, -7.0), new Vector(-9.0, 2.0), new Vector(-4.0, 9.0) };
 		
 		smallMeteorImages.add(pointsIn);
 		
 		smallMeteorColliders = new ArrayList<>();
 		
-		Vector2D[] pointsInCollidersOne = { new Vector2D(4.0, 5.0), new Vector2D(10.0, 3.0), new Vector2D(6.0, -7.0), new Vector2D(2.0, -6.0) };
+		Vector[] pointsInCollidersOne = { new Vector(4.0, 5.0), new Vector(10.0, 3.0), new Vector(6.0, -7.0), new Vector(2.0, -6.0) };
 		
 		smallMeteorColliders.add(pointsInCollidersOne);
 		
-		Vector2D[] pointsInCollidersTwo = { new Vector2D(3.0, 8.0), new Vector2D(4.0, 5.0), new Vector2D(2.0, -6.0), new Vector2D(-1.0, -9.0), new Vector2D(-8.0, -7.0),
-				new Vector2D(-9.0, 2.0), new Vector2D(-4.0, 9.0) };
+		Vector[] pointsInCollidersTwo = { new Vector(3.0, 8.0), new Vector(4.0, 5.0), new Vector(2.0, -6.0), new Vector(-1.0, -9.0), new Vector(-8.0, -7.0),
+				new Vector(-9.0, 2.0), new Vector(-4.0, 9.0) };
 		
 		smallMeteorColliders.add(pointsInCollidersTwo);
 		
@@ -40,7 +40,7 @@ public class SmallMeteor extends PolySprite {
 	}
 	
 	@Override
-	public void setPosition(Vector2D position) {
+	public void setPosition(Vector position) {
 		this.position = position;
 	}
 }

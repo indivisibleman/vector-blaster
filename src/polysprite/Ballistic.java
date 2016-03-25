@@ -2,33 +2,33 @@ package polysprite;
 
 import java.util.ArrayList;
 
-import collision.Vector2D;
+import collision.Vector;
 
 /**
  *
  * @author Michael Topsom
  */
 public class Ballistic extends PolySprite {
-	private ArrayList<Vector2D[]> ballisticImages;
+	private ArrayList<Vector[]> ballisticImages;
 	
-	private ArrayList<Vector2D[]> ballisticColliders;
+	private ArrayList<Vector[]> ballisticColliders;
 	
 	private int alive = 200;
 	
-	public Ballistic(Vector2D position, double orientation) {
+	public Ballistic(Vector position, double orientation) {
 		super();
 		
 		ballisticImages = new ArrayList<>();
 		
-		Vector2D[] pointsIn = { new Vector2D(2.0, 2.0), new Vector2D(-2.0, 2.0), new Vector2D(-2.0, -2.0), new Vector2D(2.0, -2.0) };
+		Vector[] pointsIn = { new Vector(2.0, 2.0), new Vector(-2.0, 2.0), new Vector(-2.0, -2.0), new Vector(2.0, -2.0) };
 		
 		ballisticImages.add(pointsIn);
 		
-		Vector2D[] pointsInTwo = { new Vector2D(2.5, 0.0), new Vector2D(-2.5, 0.0) };
+		Vector[] pointsInTwo = { new Vector(2.5, 0.0), new Vector(-2.5, 0.0) };
 		
 		ballisticImages.add(pointsInTwo);
 		
-		Vector2D[] pointsInThree = { new Vector2D(0.0, 2.5), new Vector2D(0.0, -2.5) };
+		Vector[] pointsInThree = { new Vector(0.0, 2.5), new Vector(0.0, -2.5) };
 		
 		ballisticImages.add(pointsInThree);
 		

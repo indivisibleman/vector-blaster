@@ -4,16 +4,16 @@ package collision;
  *
  * @author Michael Topsom
  */
-public class Vector2D {
+public class Vector {
 	private double x;
 	private double y;
 	
-	public Vector2D() {
+	public Vector() {
 		x = 0.0;
 		y = 1.0;
 	}
 	
-	public Vector2D(double x, double y) {
+	public Vector(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -26,11 +26,11 @@ public class Vector2D {
 		return y;
 	}
 	
-	double dotProduct(Vector2D vector) {
+	double dotProduct(Vector vector) {
 		return (x * vector.getX()) + (y * vector.getY());
 	}
 	
-	public void add(Vector2D vector) {
+	public void add(Vector vector) {
 		x += vector.x;
 		y += vector.y;
 	}
@@ -44,14 +44,14 @@ public class Vector2D {
 		return Math.sqrt((x * x) + (y * y));
 	}
 	
-	Vector2D normalise() {
+	Vector normalise() {
 		double inverseMagnitude = 1.0 / this.magnitude();
 		
-		return new Vector2D(x * inverseMagnitude, y * inverseMagnitude);
+		return new Vector(x * inverseMagnitude, y * inverseMagnitude);
 	}
 	
-	Vector2D perpendicular() {
-		return new Vector2D(y * -1.0, x);
+	Vector perpendicular() {
+		return new Vector(y * -1.0, x);
 	}
 	
 	public void setX(double x) {

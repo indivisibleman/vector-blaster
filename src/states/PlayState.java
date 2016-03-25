@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import collision.Polygon2D;
-import collision.Vector2D;
+import collision.Vector;
 import core.Constants;
 import core.Constants.MeteorType;
 import core.exception.FontLoadException;
@@ -109,7 +109,7 @@ class PlayState implements State {
 		initialised = true;
 		justLoaded = true;
 		
-		ship = new Ship(new Vector2D(constants.getWindowSize().width / 2.0, constants.getWindowSize().height / 2.0));
+		ship = new Ship(new Vector(constants.getWindowSize().width / 2.0, constants.getWindowSize().height / 2.0));
 		
 		shots = new ArrayList<>();
 		
@@ -120,7 +120,7 @@ class PlayState implements State {
 		level = 1;
 		ships = 4;
 		
-		hyperIndicator = new HyperIndicator(new Vector2D(100, 435));
+		hyperIndicator = new HyperIndicator(new Vector(100, 435));
 		
 		setMeteors();
 	}
@@ -268,13 +268,13 @@ class PlayState implements State {
 										score += 50;
 										break;
 									case LARGE:
-										meteorites.add(new MediumMeteor(new Vector2D(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
-										meteorites.add(new MediumMeteor(new Vector2D(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
+										meteorites.add(new MediumMeteor(new Vector(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
+										meteorites.add(new MediumMeteor(new Vector(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
 										score += 15;
 										break;
 									case MEDIUM:
-										meteorites.add(new SmallMeteor(new Vector2D(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
-										meteorites.add(new SmallMeteor(new Vector2D(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
+										meteorites.add(new SmallMeteor(new Vector(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
+										meteorites.add(new SmallMeteor(new Vector(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
 										score += 20;
 										break;
 									default:
@@ -282,7 +282,7 @@ class PlayState implements State {
 										break;
 								}
 								
-								explosions.add(new Explosion(new Vector2D(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
+								explosions.add(new Explosion(new Vector(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
 								
 								meteorites.remove(i);
 								shots.remove(k);
@@ -304,7 +304,7 @@ class PlayState implements State {
 			if(constants.getRandomInt(4) == 1) {
 				double radian = (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI;
 				
-				meteorites.add(new Alien(new Vector2D(ship.getPosition().getX() + (200 * Math.sin(radian)), ship.getPosition().getY() + (200 * Math.cos(radian)))));
+				meteorites.add(new Alien(new Vector(ship.getPosition().getX() + (200 * Math.sin(radian)), ship.getPosition().getY() + (200 * Math.cos(radian)))));
 			}
 		}
 	}
@@ -356,24 +356,24 @@ class PlayState implements State {
 	private void reset() {
 		shots.clear();
 		
-		ship = new Ship(new Vector2D(constants.getWindowSize().width / 2.0, constants.getWindowSize().height / 2.0));
+		ship = new Ship(new Vector(constants.getWindowSize().width / 2.0, constants.getWindowSize().height / 2.0));
 		
 		double radian;
 		
 		for(int i = 0; i < meteorites.size(); i++) {
 			radian = Math.PI * 2 * constants.getRandomDouble();
-			meteorites.get(i).setPosition(new Vector2D(ship.getPosition().getX() + (200 * Math.sin(radian)), ship.getPosition().getY() + (200 * Math.cos(radian))));
+			meteorites.get(i).setPosition(new Vector(ship.getPosition().getX() + (200 * Math.sin(radian)), ship.getPosition().getY() + (200 * Math.cos(radian))));
 		}
 	}
 	
 	private void hyperSpace() {
-		ship = new Ship(new Vector2D(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble()));
+		ship = new Ship(new Vector(constants.getWindowSize().width * constants.getRandomDouble(), constants.getWindowSize().height * constants.getRandomDouble()));
 		
 		double radian;
 		
 		for(int i = 0; i < meteorites.size(); i++) {
 			radian = Math.PI * 2 * constants.getRandomDouble();
-			meteorites.get(i).setPosition(new Vector2D(ship.getPosition().getX() + (200 * Math.sin(radian)), ship.getPosition().getY() + (200 * Math.cos(radian))));
+			meteorites.get(i).setPosition(new Vector(ship.getPosition().getX() + (200 * Math.sin(radian)), ship.getPosition().getY() + (200 * Math.cos(radian))));
 		}
 	}
 	
@@ -383,7 +383,7 @@ class PlayState implements State {
 		for(int i = 0; i < level + 4; i++) {
 			radian = Math.PI * 2 * constants.getRandomDouble();
 			
-			meteorites.add(new LargeMeteor(new Vector2D(ship.getPosition().getX() + (200 * Math.sin(radian)), ship.getPosition().getY() + (200 * Math.cos(radian)))));
+			meteorites.add(new LargeMeteor(new Vector(ship.getPosition().getX() + (200 * Math.sin(radian)), ship.getPosition().getY() + (200 * Math.cos(radian)))));
 		}
 	}
 	

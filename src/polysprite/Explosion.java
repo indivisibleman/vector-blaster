@@ -3,7 +3,7 @@ package polysprite;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import collision.Vector2D;
+import collision.Vector;
 import core.Constants;
 
 /**
@@ -13,7 +13,7 @@ import core.Constants;
 public class Explosion {
 	private ArrayList<ExplosionPiece> pieces;
 	
-	public Explosion(Vector2D position) {
+	public Explosion(Vector position) {
 		pieces = new ArrayList<>();
 		
 		Constants constants = Constants.getInstance();
@@ -21,7 +21,7 @@ public class Explosion {
 		int numPieces = 3 + constants.getRandomInt(8);
 		
 		for(int i = 0; i < numPieces; i++) {
-			pieces.add(new ExplosionPiece(new Vector2D(position.getX(), position.getY())));
+			pieces.add(new ExplosionPiece(new Vector(position.getX(), position.getY())));
 		}
 	}
 	

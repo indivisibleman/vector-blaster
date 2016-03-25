@@ -3,7 +3,7 @@ package polysprite;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import collision.Vector2D;
+import collision.Vector;
 import core.Constants.MeteorType;
 
 /**
@@ -11,32 +11,32 @@ import core.Constants.MeteorType;
  * @author Michael Topsom
  */
 public class Alien extends PolySprite {
-	private ArrayList<Vector2D[]> alienImages;
+	private ArrayList<Vector[]> alienImages;
 	
-	private ArrayList<Vector2D[]> alienColliders;
+	private ArrayList<Vector[]> alienColliders;
 	
 	private int alive = 400;
 	
-	public Alien(Vector2D position) {
+	public Alien(Vector position) {
 		super();
 		
 		alienImages = new ArrayList<>();
 		
-		Vector2D[] pointsIn = { new Vector2D(6.0, 12.0), new Vector2D(12.0, 6.0), new Vector2D(12.0, -6.0), new Vector2D(6.0, -12.0), new Vector2D(-6.0, -12.0),
-				new Vector2D(-12.0, -6.0), new Vector2D(-12.0, 6.0), new Vector2D(-6.0, 12.0) };
+		Vector[] pointsIn = { new Vector(6.0, 12.0), new Vector(12.0, 6.0), new Vector(12.0, -6.0), new Vector(6.0, -12.0), new Vector(-6.0, -12.0),
+				new Vector(-12.0, -6.0), new Vector(-12.0, 6.0), new Vector(-6.0, 12.0) };
 		
 		alienImages.add(pointsIn);
 		
-		Vector2D[] pointsInTwo = { new Vector2D(2.5, 0.0), new Vector2D(-2.5, 0.0) };
+		Vector[] pointsInTwo = { new Vector(2.5, 0.0), new Vector(-2.5, 0.0) };
 		
 		alienImages.add(pointsInTwo);
 		
-		Vector2D[] pointsInThree = { new Vector2D(0.0, 2.5), new Vector2D(0.0, -2.5) };
+		Vector[] pointsInThree = { new Vector(0.0, 2.5), new Vector(0.0, -2.5) };
 		
 		alienImages.add(pointsInThree);
 		
-		Vector2D[] pointsInFour = { new Vector2D(3.0, 6.0), new Vector2D(6.0, 3.0), new Vector2D(6.0, -3.0), new Vector2D(3.0, -6.0), new Vector2D(-3.0, -6.0),
-				new Vector2D(-6.0, -3.0), new Vector2D(-6.0, 3.0), new Vector2D(-3.0, 6.0) };
+		Vector[] pointsInFour = { new Vector(3.0, 6.0), new Vector(6.0, 3.0), new Vector(6.0, -3.0), new Vector(3.0, -6.0), new Vector(-3.0, -6.0),
+				new Vector(-6.0, -3.0), new Vector(-6.0, 3.0), new Vector(-3.0, 6.0) };
 		
 		alienImages.add(pointsInFour);
 		

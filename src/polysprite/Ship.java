@@ -2,23 +2,23 @@ package polysprite;
 
 import java.util.ArrayList;
 
-import collision.Vector2D;
+import collision.Vector;
 
 /**
  *
  * @author Michael Topsom
  */
 public class Ship extends PolySprite {
-	private ArrayList<Vector2D[]> shipImages;
+	private ArrayList<Vector[]> shipImages;
 	
-	private ArrayList<Vector2D[]> shipColliders;
+	private ArrayList<Vector[]> shipColliders;
 	
-	public Ship(Vector2D position) {
+	public Ship(Vector position) {
 		super();
 		
 		shipImages = new ArrayList<>();
 		
-		Vector2D[] pointsIn = { new Vector2D(20.0, 0.0), new Vector2D(-12.0, 10.0), new Vector2D(-8.0, 0.0), new Vector2D(-12.0, -10.0) };
+		Vector[] pointsIn = { new Vector(20.0, 0.0), new Vector(-12.0, 10.0), new Vector(-8.0, 0.0), new Vector(-12.0, -10.0) };
 		
 		shipImages.add(pointsIn);
 		
@@ -33,7 +33,7 @@ public class Ship extends PolySprite {
 		return orientation;
 	}
 	
-	public Vector2D getFirePosition() {
-		return new Vector2D(position.getX() + 20.0 * Math.cos(orientation), position.getY() + 20.0 * Math.sin(orientation));
+	public Vector getFirePosition() {
+		return new Vector(position.getX() + 20.0 * Math.cos(orientation), position.getY() + 20.0 * Math.sin(orientation));
 	}
 }
