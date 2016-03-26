@@ -40,6 +40,7 @@ public class HyperIndicator extends Sprite {
 			for(Vector point : polyImage) {
 				Vector modifiedPoint = new Vector(point.getX() * Math.cos(orientation + spin) - point.getY() * Math.sin(orientation + spin),
 						point.getY() * Math.cos(orientation + spin) + point.getX() * Math.sin(orientation + spin));
+				modifiedPoint.add(position);
 				
 				modifiedShape.add(modifiedPoint);
 			}
@@ -51,8 +52,6 @@ public class HyperIndicator extends Sprite {
 			for(int i = 1; i < modifiedShape.size(); i++) {
 				poly.lineTo(modifiedShape.get(i).getX(), modifiedShape.get(i).getY());
 			}
-			
-			poly.closePath();
 			
 			g2d.setColor(colour);
 			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
