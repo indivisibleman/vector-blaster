@@ -19,8 +19,8 @@ import core.Utilities;
 import core.exception.FontLoadException;
 import polysprite.LargeMeteor;
 import polysprite.MediumMeteor;
-import polysprite.PolySprite;
 import polysprite.SmallMeteor;
+import polysprite.Sprite;
 
 /**
  *
@@ -48,7 +48,7 @@ class MenuState implements State {
 	private boolean fadeOut = false;
 	private float alpha = 1.0f;
 	
-	private ArrayList<PolySprite> meteors;
+	private ArrayList<Sprite> meteors;
 	
 	private ArrayList<SmallMeteor> choiceMarkers;
 	

@@ -8,26 +8,28 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import collision.Polygon2D;
+import collision.Polygon;
 import collision.Vector;
 import core.Constants;
-import core.Constants.MeteorType;
-import core.exception.FontLoadException;
+import core.Constants.SpriteType;
 import core.State;
 import core.StateManager;
 import core.Utilities;
+import core.exception.FontLoadException;
 import polysprite.Alien;
 import polysprite.Ballistic;
 import polysprite.Explosion;
 import polysprite.HyperIndicator;
 import polysprite.LargeMeteor;
 import polysprite.MediumMeteor;
-import polysprite.PolySprite;
 import polysprite.Ship;
 import polysprite.SmallMeteor;
+import polysprite.Sprite;
 
 /**
  *
@@ -74,15 +76,12 @@ class PlayState implements State {
 	
 	private ArrayList<Ballistic> shots;
 	
-	private ArrayList<PolySprite> meteorites;
+	private ArrayList<Sprite> meteorites;
 	
 	private ArrayList<Explosion> explosions;
 	
-	private Polygon2D shipPoly;
-	private Polygon2D meteorPoly;
-	private Polygon2D shotPoly;
-	
-	private MeteorType meteorType;
+	private Polygon shipPoly;
+	private Polygon meteorPoly;
 	
 	private int level;
 	private int ships;
@@ -222,10 +221,10 @@ class PlayState implements State {
 			meteorites.get(i).update(0.0, 1.2);
 		}
 		
-		shipPoly = new Polygon2D(ship.getColliders().get(0));
+		shipPoly = ship.getColliders().get(0);
 		
 		for(int i = 0; i < meteorites.size(); i++) {
-			if(meteorites.get(i).getType().equals(MeteorType.ALIEN)) {
+			if(meteorites.get(i).getType().equals(SpriteType.ALIEN)) {
 				Alien tmp = (Alien) meteorites.get(i);
 				if(!tmp.alive()) {
 					meteorites.remove(i);
@@ -235,7 +234,7 @@ class PlayState implements State {
 		
 		for(int i = 0; i < meteorites.size(); i++) {
 			for(int j = 0; j < meteorites.get(i).getColliders().size(); j++) {
-				meteorPoly = new Polygon2D(meteorites.get(i).getColliders().get(j));
+				meteorPoly = meteorites.get(i).getColliders().get(j);
 				
 				if(shipPoly.intersects(meteorPoly)) {
 					ships--;
@@ -250,48 +249,31 @@ class PlayState implements State {
 			}
 		}
 		
-		for(int i = 0; i < meteorites.size(); i++) {
-			try {
-				for(int j = 0; j < meteorites.get(i).getColliders().size(); j++) {
+		List<Sprite> newMeteorites = new ArrayList<>();
+		
+		for(Iterator<Ballistic> shotsIterator = shots.iterator(); shotsIterator.hasNext();) {
+			Ballistic shot = shotsIterator.next();
+			
+			for(Iterator<Sprite> meteoritesIterator = meteorites.iterator(); meteoritesIterator.hasNext();) {
+				Sprite meteorite = meteoritesIterator.next();
+				
+				if(shot.intersects(meteorite)) {
+					newMeteorites.addAll(hit(meteorite.getType(), meteorite.getPosition()));
 					
-					meteorType = meteorites.get(i).getType();
+					explosions.add(new Explosion(new Vector(meteorite.getPosition().getX(), meteorite.getPosition().getY())));
 					
-					meteorPoly = new Polygon2D(meteorites.get(i).getColliders().get(j));
+					shotsIterator.remove();
+					meteoritesIterator.remove();
 					
-					for(int k = 0; k < shots.size(); k++) {
-						for(int l = 0; l < shots.get(k).getColliders().size(); l++) {
-							shotPoly = new Polygon2D(shots.get(k).getColliders().get(j));
-							
-							if(meteorPoly.intersects(shotPoly)) {
-								switch(meteorType) {
-									case ALIEN:
-										score += 50;
-										break;
-									case LARGE:
-										meteorites.add(new MediumMeteor(new Vector(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
-										meteorites.add(new MediumMeteor(new Vector(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
-										score += 15;
-										break;
-									case MEDIUM:
-										meteorites.add(new SmallMeteor(new Vector(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
-										meteorites.add(new SmallMeteor(new Vector(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
-										score += 20;
-										break;
-									default:
-										score += 30;
-										break;
-								}
-								
-								explosions.add(new Explosion(new Vector(meteorites.get(i).getPosition().getX(), meteorites.get(i).getPosition().getY())));
-								
-								meteorites.remove(i);
-								shots.remove(k);
-							}
-						}
-					}
+					continue;
 				}
-			} catch(IndexOutOfBoundsException ioobe) {
 			}
+		}
+		
+		if(!newMeteorites.isEmpty()) {
+			meteorites.addAll(newMeteorites);
+			
+			newMeteorites.clear();
 		}
 		
 		if(meteorites.isEmpty()) {
@@ -307,6 +289,31 @@ class PlayState implements State {
 				meteorites.add(new Alien(new Vector(ship.getPosition().getX() + (200 * Math.sin(radian)), ship.getPosition().getY() + (200 * Math.cos(radian)))));
 			}
 		}
+	}
+	
+	private List<Sprite> hit(SpriteType spriteType, Vector position) {
+		List<Sprite> newMeteorites = new ArrayList<>();
+		
+		switch(spriteType) {
+			case ALIEN:
+				score += 50;
+				break;
+			case LARGE:
+				newMeteorites.add(new MediumMeteor(new Vector(position.getX(), position.getY())));
+				newMeteorites.add(new MediumMeteor(new Vector(position.getX(), position.getY())));
+				score += 15;
+				break;
+			case MEDIUM:
+				newMeteorites.add(new SmallMeteor(new Vector(position.getX(), position.getY())));
+				newMeteorites.add(new SmallMeteor(new Vector(position.getX(), position.getY())));
+				score += 20;
+				break;
+			default:
+				score += 30;
+				break;
+		}
+		
+		return newMeteorites;
 	}
 	
 	@Override

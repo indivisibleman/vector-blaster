@@ -1,46 +1,61 @@
 package polysprite;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import collision.Vector;
-import core.Constants.MeteorType;
+import core.Constants.SpriteType;
 
 /**
  *
  * @author Michael Topsom
  */
-public class SmallMeteor extends PolySprite {
-	private ArrayList<Vector[]> smallMeteorImages;
-	
-	private ArrayList<Vector[]> smallMeteorColliders;
+public class SmallMeteor extends Sprite {
+	private List<List<Vector>> smallMeteorImages;
+	private List<List<Vector>> smallMeteorColliders;
 	
 	public SmallMeteor(Vector position) {
 		super();
 		
 		smallMeteorImages = new ArrayList<>();
 		
-		Vector[] pointsIn = { new Vector(3.0, 8.0), new Vector(4.0, 5.0), new Vector(10.0, 3.0), new Vector(6.0, -7.0), new Vector(2.0, -6.0), new Vector(-1.0, -9.0),
-				new Vector(-8.0, -7.0), new Vector(-9.0, 2.0), new Vector(-4.0, 9.0) };
+		List<Vector> smallMeteorImage = new ArrayList<>();
 		
-		smallMeteorImages.add(pointsIn);
+		smallMeteorImage.add(new Vector(3.0, 8.0));
+		smallMeteorImage.add(new Vector(4.0, 5.0));
+		smallMeteorImage.add(new Vector(10.0, 3.0));
+		smallMeteorImage.add(new Vector(6.0, -7.0));
+		smallMeteorImage.add(new Vector(2.0, -6.0));
+		smallMeteorImage.add(new Vector(-1.0, -9.0));
+		smallMeteorImage.add(new Vector(-8.0, -7.0));
+		smallMeteorImage.add(new Vector(-9.0, 2.0));
+		smallMeteorImage.add(new Vector(-4.0, 9.0));
+		
+		smallMeteorImages.add(smallMeteorImage);
 		
 		smallMeteorColliders = new ArrayList<>();
 		
-		Vector[] pointsInCollidersOne = { new Vector(4.0, 5.0), new Vector(10.0, 3.0), new Vector(6.0, -7.0), new Vector(2.0, -6.0) };
+		List<Vector> smallMeteorCollider = new ArrayList<>();
 		
-		smallMeteorColliders.add(pointsInCollidersOne);
+		smallMeteorCollider.add(new Vector(4.0, 5.0));
+		smallMeteorCollider.add(new Vector(10.0, 3.0));
+		smallMeteorCollider.add(new Vector(6.0, -7.0));
+		smallMeteorCollider.add(new Vector(2.0, -6.0));
 		
-		Vector[] pointsInCollidersTwo = { new Vector(3.0, 8.0), new Vector(4.0, 5.0), new Vector(2.0, -6.0), new Vector(-1.0, -9.0), new Vector(-8.0, -7.0),
-				new Vector(-9.0, 2.0), new Vector(-4.0, 9.0) };
+		smallMeteorColliders.add(smallMeteorCollider);
 		
-		smallMeteorColliders.add(pointsInCollidersTwo);
+		smallMeteorCollider = new ArrayList<>();
 		
-		initialise(smallMeteorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1,
-				MeteorType.SMALL);
-	}
-	
-	@Override
-	public void setPosition(Vector position) {
-		this.position = position;
+		smallMeteorCollider.add(new Vector(3.0, 8.0));
+		smallMeteorCollider.add(new Vector(4.0, 5.0));
+		smallMeteorCollider.add(new Vector(2.0, -6.0));
+		smallMeteorCollider.add(new Vector(-1.0, -9.0));
+		smallMeteorCollider.add(new Vector(-8.0, -7.0));
+		smallMeteorCollider.add(new Vector(-9.0, 2.0));
+		smallMeteorCollider.add(new Vector(-4.0, 9.0));
+		
+		smallMeteorColliders.add(smallMeteorCollider);
+		
+		initialise(smallMeteorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1, SpriteType.SMALL);
 	}
 }

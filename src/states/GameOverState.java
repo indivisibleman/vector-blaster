@@ -19,8 +19,8 @@ import core.Utilities;
 import core.exception.FontLoadException;
 import polysprite.LargeMeteor;
 import polysprite.MediumMeteor;
-import polysprite.PolySprite;
 import polysprite.SmallMeteor;
+import polysprite.Sprite;
 
 /**
  *
@@ -35,7 +35,7 @@ class GameOverState implements State {
 	
 	private float alpha = 1.0f;
 	
-	private ArrayList<PolySprite> meteors;
+	private ArrayList<Sprite> meteors;
 	
 	private boolean fadeIn = false;
 	private boolean fadeOut = false;

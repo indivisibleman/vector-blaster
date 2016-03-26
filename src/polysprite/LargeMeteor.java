@@ -1,56 +1,92 @@
 package polysprite;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import collision.Vector;
-import core.Constants.MeteorType;
+import core.Constants.SpriteType;
 
 /**
  *
  * @author Michael Topsom
  */
-public class LargeMeteor extends PolySprite {
-	private ArrayList<Vector[]> largeMeteorImages;
-	
-	private ArrayList<Vector[]> largeMeteorColliders;
+public class LargeMeteor extends Sprite {
+	private List<List<Vector>> largeMeteorImages;
+	private List<List<Vector>> largeMeteorColliders;
 	
 	public LargeMeteor(Vector position) {
 		super();
 		
 		largeMeteorImages = new ArrayList<>();
 		
-		Vector[] pointsIn = { new Vector(0.0, 22.0), new Vector(12.0, 18.0), new Vector(18.0, 20.0), new Vector(23.0, 15.0), new Vector(22.0, 10.0),
-				new Vector(18.0, 5.0), new Vector(23.0, -3.0), new Vector(21.0, -10.0), new Vector(17.0, -14.0), new Vector(16.0, -19.0), new Vector(3.0, -22.0),
-				new Vector(-14.0, -20.0), new Vector(-17.0, -15.0), new Vector(-23.0, -12.0), new Vector(-23.0, -2.0), new Vector(-18.0, 3.0), new Vector(-22.0, 11.0),
-				new Vector(-17.0, 20.0) };
+		List<Vector> largeMeteorImage = new ArrayList<>();
 		
-		largeMeteorImages.add(pointsIn);
+		largeMeteorImage.add(new Vector(0.0, 22.0));
+		largeMeteorImage.add(new Vector(12.0, 18.0));
+		largeMeteorImage.add(new Vector(18.0, 20.0));
+		largeMeteorImage.add(new Vector(23.0, 15.0));
+		largeMeteorImage.add(new Vector(22.0, 10.0));
+		largeMeteorImage.add(new Vector(18.0, 5.0));
+		largeMeteorImage.add(new Vector(23.0, -3.0));
+		largeMeteorImage.add(new Vector(21.0, -10.0));
+		largeMeteorImage.add(new Vector(17.0, -14.0));
+		largeMeteorImage.add(new Vector(16.0, -19.0));
+		largeMeteorImage.add(new Vector(3.0, -22.0));
+		largeMeteorImage.add(new Vector(-14.0, -20.0));
+		largeMeteorImage.add(new Vector(-17.0, -15.0));
+		largeMeteorImage.add(new Vector(-23.0, -12.0));
+		largeMeteorImage.add(new Vector(-23.0, -2.0));
+		largeMeteorImage.add(new Vector(-18.0, 3.0));
+		largeMeteorImage.add(new Vector(-22.0, 11.0));
+		largeMeteorImage.add(new Vector(-17.0, 20.0));
+		
+		largeMeteorImages.add(largeMeteorImage);
 		
 		largeMeteorColliders = new ArrayList<>();
 		
-		Vector[] pointsInCollidersOne = { new Vector(12.0, 18.0), new Vector(18.0, 20.0), new Vector(23.0, 15.0), new Vector(22.0, 10.0), new Vector(18.0, 5.0),
-				new Vector(-18.0, 3.0) };
+		List<Vector> largeMeteorCollider = new ArrayList<>();
 		
-		largeMeteorColliders.add(pointsInCollidersOne);
+		largeMeteorCollider.add(new Vector(12.0, 18.0));
+		largeMeteorCollider.add(new Vector(18.0, 20.0));
+		largeMeteorCollider.add(new Vector(23.0, 15.0));
+		largeMeteorCollider.add(new Vector(22.0, 10.0));
+		largeMeteorCollider.add(new Vector(18.0, 5.0));
+		largeMeteorCollider.add(new Vector(-18.0, 3.0));
 		
-		Vector[] pointsInCollidersTwo = { new Vector(18.0, 5.0), new Vector(23.0, -3.0), new Vector(21.0, -10.0), new Vector(17.0, -14.0), new Vector(-18.0, 3.0) };
+		largeMeteorColliders.add(largeMeteorCollider);
 		
-		largeMeteorColliders.add(pointsInCollidersTwo);
+		largeMeteorCollider.add(new Vector(18.0, 5.0));
+		largeMeteorCollider.add(new Vector(23.0, -3.0));
+		largeMeteorCollider.add(new Vector(21.0, -10.0));
+		largeMeteorCollider.add(new Vector(17.0, -14.0));
+		largeMeteorCollider.add(new Vector(-18.0, 3.0));
 		
-		Vector[] pointsInCollidersThree = { new Vector(17.0, -14.0), new Vector(16.0, -19.0), new Vector(3.0, -22.0), new Vector(-14.0, -20.0),
-				new Vector(-17.0, -15.0), new Vector(-18.0, 3.0) };
+		largeMeteorColliders.add(largeMeteorCollider);
 		
-		largeMeteorColliders.add(pointsInCollidersThree);
+		largeMeteorCollider.add(new Vector(17.0, -14.0));
+		largeMeteorCollider.add(new Vector(16.0, -19.0));
+		largeMeteorCollider.add(new Vector(3.0, -22.0));
+		largeMeteorCollider.add(new Vector(-14.0, -20.0));
+		largeMeteorCollider.add(new Vector(-17.0, -15.0));
+		largeMeteorCollider.add(new Vector(-18.0, 3.0));
 		
-		Vector[] pointsInCollidersFour = { new Vector(-17.0, -15.0), new Vector(-23.0, -12.0), new Vector(-23.0, -2.0), new Vector(-18.0, 3.0) };
+		largeMeteorColliders.add(largeMeteorCollider);
 		
-		largeMeteorColliders.add(pointsInCollidersFour);
+		largeMeteorCollider.add(new Vector(-17.0, -15.0));
+		largeMeteorCollider.add(new Vector(-23.0, -12.0));
+		largeMeteorCollider.add(new Vector(-23.0, -2.0));
+		largeMeteorCollider.add(new Vector(-18.0, 3.0));
 		
-		Vector[] pointsInCollidersFive = { new Vector(-18.0, 3.0), new Vector(-22.0, 11.0), new Vector(-17.0, 20.0), new Vector(0.0, 22.0), new Vector(12.0, 18.0) };
+		largeMeteorColliders.add(largeMeteorCollider);
 		
-		largeMeteorColliders.add(pointsInCollidersFive);
+		largeMeteorCollider.add(new Vector(-18.0, 3.0));
+		largeMeteorCollider.add(new Vector(-22.0, 11.0));
+		largeMeteorCollider.add(new Vector(-17.0, 20.0));
+		largeMeteorCollider.add(new Vector(0.0, 22.0));
+		largeMeteorCollider.add(new Vector(12.0, 18.0));
 		
-		initialise(largeMeteorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1,
-				MeteorType.LARGE);
+		largeMeteorColliders.add(largeMeteorCollider);
+		
+		initialise(largeMeteorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1, SpriteType.LARGE);
 	}
 }

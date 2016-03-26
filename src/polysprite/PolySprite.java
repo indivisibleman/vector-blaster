@@ -11,7 +11,7 @@ import java.util.List;
 
 import collision.Vector;
 import core.Constants;
-import core.Constants.MeteorType;
+import core.Constants.SpriteType;
 
 /**
  *
@@ -45,21 +45,21 @@ public class PolySprite {
 	
 	protected Constants constants;
 	
-	private MeteorType type;
+	private SpriteType type;
 	
 	public PolySprite() {
 		constants = Constants.getInstance();
 		
-		type = MeteorType.DEFAULT;
+		type = SpriteType.DEFAULT;
 	}
 	
-	void initialise(List<Vector[]> polyImages, Vector position, double orientation, double spinRate, MeteorType type) {
+	void initialise(List<Vector[]> polyImages, Vector position, double orientation, double spinRate, SpriteType type) {
 		initialise(polyImages, position, orientation, spinRate);
 		
 		this.type = type;
 	}
 	
-	public MeteorType getType() {
+	public SpriteType getType() {
 		return type;
 	}
 	

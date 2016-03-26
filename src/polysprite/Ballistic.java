@@ -1,6 +1,7 @@
 package polysprite;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import collision.Vector;
 
@@ -8,10 +9,9 @@ import collision.Vector;
  *
  * @author Michael Topsom
  */
-public class Ballistic extends PolySprite {
-	private ArrayList<Vector[]> ballisticImages;
-	
-	private ArrayList<Vector[]> ballisticColliders;
+public class Ballistic extends Sprite {
+	private List<List<Vector>> ballisticImages;
+	private List<List<Vector>> ballisticColliders;
 	
 	private int alive = 200;
 	
@@ -20,21 +20,37 @@ public class Ballistic extends PolySprite {
 		
 		ballisticImages = new ArrayList<>();
 		
-		Vector[] pointsIn = { new Vector(2.0, 2.0), new Vector(-2.0, 2.0), new Vector(-2.0, -2.0), new Vector(2.0, -2.0) };
+		List<Vector> ballisticImage = new ArrayList<>();
 		
-		ballisticImages.add(pointsIn);
+		ballisticImage.add(new Vector(2.0, 2.0));
+		ballisticImage.add(new Vector(-2.0, 2.0));
+		ballisticImage.add(new Vector(-2.0, -2.0));
+		ballisticImage.add(new Vector(2.0, -2.0));
 		
-		Vector[] pointsInTwo = { new Vector(2.5, 0.0), new Vector(-2.5, 0.0) };
+		ballisticImages.add(ballisticImage);
 		
-		ballisticImages.add(pointsInTwo);
+		ballisticImage = new ArrayList<>();
 		
-		Vector[] pointsInThree = { new Vector(0.0, 2.5), new Vector(0.0, -2.5) };
+		ballisticImage.add(new Vector(2.5, 0.0));
+		ballisticImage.add(new Vector(-2.5, 0.0));
 		
-		ballisticImages.add(pointsInThree);
+		ballisticImages.add(ballisticImage);
+		
+		ballisticImage.add(new Vector(0.0, 2.5));
+		ballisticImage.add(new Vector(0.0, -2.5));
+		
+		ballisticImages.add(ballisticImage);
 		
 		ballisticColliders = new ArrayList<>();
 		
-		ballisticColliders.add(pointsIn);
+		List<Vector> ballisticCollider = new ArrayList<>();
+		
+		ballisticCollider.add(new Vector(2.0, 2.0));
+		ballisticCollider.add(new Vector(-2.0, 2.0));
+		ballisticCollider.add(new Vector(-2.0, -2.0));
+		ballisticCollider.add(new Vector(2.0, -2.0));
+		
+		ballisticColliders.add(ballisticCollider);
 		
 		initialise(ballisticImages, position, orientation, 0.0);
 	}

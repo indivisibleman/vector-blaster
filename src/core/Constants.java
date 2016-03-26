@@ -19,7 +19,7 @@ public class Constants {
 	
 	private Random rand;
 	
-	public enum MeteorType {
+	public enum SpriteType {
 		DEFAULT, SMALL, MEDIUM, LARGE, ALIEN
 	};
 	

@@ -2,18 +2,18 @@ package polysprite;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import collision.Vector;
-import core.Constants.MeteorType;
+import core.Constants.SpriteType;
 
 /**
  *
  * @author Michael Topsom
  */
-public class Alien extends PolySprite {
-	private ArrayList<Vector[]> alienImages;
-	
-	private ArrayList<Vector[]> alienColliders;
+public class Alien extends Sprite {
+	private List<List<Vector>> alienImages;
+	private List<List<Vector>> alienColliders;
 	
 	private int alive = 400;
 	
@@ -22,29 +22,62 @@ public class Alien extends PolySprite {
 		
 		alienImages = new ArrayList<>();
 		
-		Vector[] pointsIn = { new Vector(6.0, 12.0), new Vector(12.0, 6.0), new Vector(12.0, -6.0), new Vector(6.0, -12.0), new Vector(-6.0, -12.0),
-				new Vector(-12.0, -6.0), new Vector(-12.0, 6.0), new Vector(-6.0, 12.0) };
+		List<Vector> alienImage = new ArrayList<>();
 		
-		alienImages.add(pointsIn);
+		alienImage.add(new Vector(6.0, 12.0));
+		alienImage.add(new Vector(12.0, 6.0));
+		alienImage.add(new Vector(12.0, -6.0));
+		alienImage.add(new Vector(6.0, -12.0));
+		alienImage.add(new Vector(-6.0, -12.0));
+		alienImage.add(new Vector(-12.0, -6.0));
+		alienImage.add(new Vector(-12.0, 6.0));
+		alienImage.add(new Vector(-6.0, 12.0));
 		
-		Vector[] pointsInTwo = { new Vector(2.5, 0.0), new Vector(-2.5, 0.0) };
+		alienImages.add(alienImage);
 		
-		alienImages.add(pointsInTwo);
+		alienImage = new ArrayList<>();
 		
-		Vector[] pointsInThree = { new Vector(0.0, 2.5), new Vector(0.0, -2.5) };
+		alienImage.add(new Vector(2.5, 0.0));
+		alienImage.add(new Vector(-2.5, 0.0));
 		
-		alienImages.add(pointsInThree);
+		alienImages.add(alienImage);
 		
-		Vector[] pointsInFour = { new Vector(3.0, 6.0), new Vector(6.0, 3.0), new Vector(6.0, -3.0), new Vector(3.0, -6.0), new Vector(-3.0, -6.0),
-				new Vector(-6.0, -3.0), new Vector(-6.0, 3.0), new Vector(-3.0, 6.0) };
+		alienImage = new ArrayList<>();
 		
-		alienImages.add(pointsInFour);
+		alienImage.add(new Vector(0.0, 2.5));
+		alienImage.add(new Vector(0.0, -2.5));
+		
+		alienImages.add(alienImage);
+		
+		alienImage = new ArrayList<>();
+		
+		alienImage.add(new Vector(3.0, 6.0));
+		alienImage.add(new Vector(6.0, 3.0));
+		alienImage.add(new Vector(6.0, -3.0));
+		alienImage.add(new Vector(3.0, -6.0));
+		alienImage.add(new Vector(-3.0, -6.0));
+		alienImage.add(new Vector(-6.0, -3.0));
+		alienImage.add(new Vector(-6.0, 3.0));
+		alienImage.add(new Vector(-3.0, 6.0));
+		
+		alienImages.add(alienImage);
 		
 		alienColliders = new ArrayList<>();
 		
-		alienColliders.add(pointsIn);
+		List<Vector> alienCollider = new ArrayList<>();
 		
-		initialise(alienImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1, MeteorType.ALIEN);
+		alienCollider.add(new Vector(6.0, 12.0));
+		alienCollider.add(new Vector(12.0, 6.0));
+		alienCollider.add(new Vector(12.0, -6.0));
+		alienCollider.add(new Vector(6.0, -12.0));
+		alienCollider.add(new Vector(-6.0, -12.0));
+		alienCollider.add(new Vector(-12.0, -6.0));
+		alienCollider.add(new Vector(-12.0, 6.0));
+		alienCollider.add(new Vector(-6.0, 12.0));
+		
+		alienColliders.add(alienCollider);
+		
+		initialise(alienImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1, SpriteType.ALIEN);
 		
 		colour = Color.GREEN;
 	}

@@ -2,6 +2,7 @@ package polysprite;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.List;
 
 import collision.Vector;
 
@@ -9,8 +10,8 @@ import collision.Vector;
  *
  * @author Michael Topsom
  */
-class ExplosionPiece extends PolySprite {
-	private ArrayList<Vector[]> explosionPieceImages;
+class ExplosionPiece extends Sprite {
+	private List<List<Vector>> explosionPieceImages;
 	
 	private int alive = 50;
 	
@@ -19,12 +20,14 @@ class ExplosionPiece extends PolySprite {
 		
 		explosionPieceImages = new ArrayList<>();
 		
+		List<Vector> explosionPieceImage = new ArrayList<>();
+		
 		double size = 1 + constants.getRandomDouble() * 5;
 		
-		Vector[] pointsIn = { new Vector(size, size), new Vector(-size, -size) };
+		explosionPieceImage.add(new Vector(size, size));
+		explosionPieceImage.add(new Vector(-size, -size));
 		
-		explosionPieceImages.add(pointsIn);
-		;
+		explosionPieceImages.add(explosionPieceImage);
 		
 		initialise(explosionPieceImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, (constants.getRandomDouble() * 0.2) - 0.1);
 	}
