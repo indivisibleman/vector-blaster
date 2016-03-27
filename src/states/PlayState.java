@@ -251,6 +251,7 @@ class PlayState implements State {
 		
 		List<Sprite> newMeteorites = new ArrayList<>();
 		
+		shotLoop:
 		for(Iterator<Ballistic> shotsIterator = shots.iterator(); shotsIterator.hasNext();) {
 			Ballistic shot = shotsIterator.next();
 			
@@ -265,7 +266,7 @@ class PlayState implements State {
 					shotsIterator.remove();
 					meteoritesIterator.remove();
 					
-					continue;
+					continue shotLoop;
 				}
 			}
 		}
