@@ -12,114 +12,114 @@ import core.exception.FontLoadException;
  */
 public class StateManager {
 	private static StateManager instance;
-	
+
 	private ArrayList<State> states = new ArrayList<>();
-	
+
 	private Logger log = Logger.getLogger(this.getClass().getName());
-	
+
 	private static final String FONT_UNAVAILABLE = "Unable to load font";
-	
+
 	private StateManager() {
 	}
-	
+
 	public static StateManager getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new StateManager();
 		}
-		
+
 		return instance;
 	}
-	
+
 	public void push(State state) {
 		states.add(state);
-		
+
 		State temp = states.get(states.size() - 1);
-		
-		if(!temp.initialised()) {
+
+		if (!temp.initialised()) {
 			try {
 				temp.initialise();
-			} catch(FontLoadException fle) {
+			} catch (FontLoadException fle) {
 				log.log(Level.SEVERE, FONT_UNAVAILABLE, fle);
 				popAll();
 			}
 		}
 	}
-	
+
 	public void changeState(State state) {
-		if(!states.isEmpty()) {
+		if (!states.isEmpty()) {
 			State temp = states.get(states.size() - 1);
 			temp.cleanUp();
-			
+
 			states.remove(states.size() - 1);
 		}
-		
+
 		states.add(state);
-		
+
 		State temp = states.get(states.size() - 1);
-		
-		if(!temp.initialised()) {
+
+		if (!temp.initialised()) {
 			try {
 				temp.initialise();
-			} catch(FontLoadException fle) {
+			} catch (FontLoadException fle) {
 				log.log(Level.SEVERE, FONT_UNAVAILABLE, fle);
 				popAll();
 			}
 		}
 	}
-	
+
 	public void changeState(State state, String args) {
-		if(!states.isEmpty()) {
+		if (!states.isEmpty()) {
 			State temp = states.get(states.size() - 1);
 			temp.cleanUp();
-			
+
 			states.remove(states.size() - 1);
 		}
-		
+
 		states.add(state);
-		
+
 		State temp = states.get(states.size() - 1);
-		
-		if(!temp.initialised()) {
+
+		if (!temp.initialised()) {
 			try {
 				temp.initialise(args);
-			} catch(FontLoadException fle) {
+			} catch (FontLoadException fle) {
 				log.log(Level.SEVERE, FONT_UNAVAILABLE, fle);
 				popAll();
 			}
 		}
 	}
-	
+
 	public void pop() {
-		if(!states.isEmpty()) {
+		if (!states.isEmpty()) {
 			State temp = states.get(states.size() - 1);
 			temp.cleanUp();
-			
+
 			states.remove(states.size() - 1);
 		}
-		
-		if(!states.isEmpty()) {
+
+		if (!states.isEmpty()) {
 			State temp = states.get(states.size() - 1);
 			temp.resume();
 		}
 	}
-	
+
 	public void popAll() {
-		while(!states.isEmpty()) {
+		while (!states.isEmpty()) {
 			State temp = states.get(states.size() - 1);
 			temp.cleanUp();
-			
+
 			states.remove(states.size() - 1);
 		}
 	}
-	
+
 	State currentState() {
-		if(!states.isEmpty()) {
+		if (!states.isEmpty()) {
 			return states.get(states.size() - 1);
 		} else {
 			return null;
 		}
 	}
-	
+
 	public boolean isEmpty() {
 		return states.isEmpty();
 	}
