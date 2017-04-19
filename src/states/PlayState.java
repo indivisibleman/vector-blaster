@@ -21,6 +21,8 @@ import core.State;
 import core.StateManager;
 import core.Utilities;
 import core.exception.FontLoadException;
+import kuusisto.tinysound.Sound;
+import kuusisto.tinysound.TinySound;
 import polysprite.Alien;
 import polysprite.Ballistic;
 import polysprite.Explosion;
@@ -42,8 +44,6 @@ class PlayState implements State {
 	private Graphics2D g2d;
 	private StateManager stateManager;
 
-	private Utilities util;
-
 	private Constants constants;
 
 	private boolean keyExit = false;
@@ -64,7 +64,6 @@ class PlayState implements State {
 	private boolean fadeIn = false;
 	private float alpha = 1.0f;
 
-	private Font font;
 	private Font fontText;
 
 	private int score = 0;
@@ -89,6 +88,9 @@ class PlayState implements State {
 	private HyperIndicator hyperIndicator;
 
 	private Logger log = Logger.getLogger(this.getClass().getName());
+	
+	private Sound fireSound;
+	private Sound destructionSound;
 
 	@Override
 	public void initialise() throws FontLoadException {
@@ -96,11 +98,16 @@ class PlayState implements State {
 
 		stateManager = StateManager.getInstance();
 
-		util = Utilities.getInstance();
+		Utilities util = Utilities.getInstance();
 
 		constants = Constants.getInstance();
 
-		font = util.getFont("BPneon.ttf");
+		TinySound.init();
+
+		fireSound = TinySound.loadSound(getClass().getResource("../core/sounds/fireSound.ogg"));
+		destructionSound = TinySound.loadSound(getClass().getResource("../core/sounds/destructionSound.ogg"));
+
+		Font font = util.getFont("BPneon.ttf");
 		fontText = font.deriveFont(42.0f);
 
 		fadeIn = true;
@@ -108,8 +115,7 @@ class PlayState implements State {
 		initialised = true;
 		justLoaded = true;
 
-		ship = new Ship(new Vector(constants.getWindowSize().width / 2.0,
-				constants.getWindowSize().height / 2.0));
+		ship = new Ship(new Vector(constants.getWindowSize().width / 2.0, constants.getWindowSize().height / 2.0));
 
 		shots = new ArrayList<>();
 
@@ -186,9 +192,10 @@ class PlayState implements State {
 		fireCount--;
 
 		if (keyFire && fireCount < 0) {
-			shots.add(new Ballistic(ship.getFirePosition(),
-					ship.getOrientation()));
+			shots.add(new Ballistic(ship.getFirePosition(), ship.getOrientation()));
 			fireCount = 20;
+			
+			fireSound.play();
 		}
 
 		for (int i = 0; i < shots.size(); i++) {
@@ -240,10 +247,11 @@ class PlayState implements State {
 
 				if (shipPoly.intersects(meteorPoly)) {
 					ships--;
+					
+					destructionSound.play();
 
 					if (ships < 0) {
-						stateManager.changeState(new GameOverState(),
-								Integer.toString(score));
+						stateManager.changeState(new GameOverState(), Integer.toString(score));
 					}
 
 					reset();
@@ -254,22 +262,20 @@ class PlayState implements State {
 
 		List<Sprite> newMeteorites = new ArrayList<>();
 
-		shotLoop: for (Iterator<Ballistic> shotsIterator = shots
-				.iterator(); shotsIterator.hasNext();) {
+		shotLoop: for (Iterator<Ballistic> shotsIterator = shots.iterator(); shotsIterator.hasNext();) {
 			Ballistic shot = shotsIterator.next();
 
-			for (Iterator<Sprite> meteoritesIterator = meteorites
-					.iterator(); meteoritesIterator.hasNext();) {
+			for (Iterator<Sprite> meteoritesIterator = meteorites.iterator(); meteoritesIterator.hasNext();) {
 				Sprite meteorite = meteoritesIterator.next();
 
 				if (shot.intersects(meteorite)) {
-					newMeteorites.addAll(
-							hit(meteorite.getType(), meteorite.getPosition()));
+					newMeteorites.addAll(hit(meteorite.getType(), meteorite.getPosition()));
 
-					explosions.add(new Explosion(
-							new Vector(meteorite.getPosition().getX(),
-									meteorite.getPosition().getY())));
+					explosions.add(
+							new Explosion(new Vector(meteorite.getPosition().getX(), meteorite.getPosition().getY())));
 
+					destructionSound.play();
+					
 					shotsIterator.remove();
 					meteoritesIterator.remove();
 
@@ -292,11 +298,9 @@ class PlayState implements State {
 			setMeteors();
 
 			if (constants.getRandomInt(4) == 1) {
-				double radian = (Math.PI * 2.0 * constants.getRandomDouble())
-						- Math.PI;
+				double radian = (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI;
 
-				meteorites.add(new Alien(new Vector(
-						ship.getPosition().getX() + (200 * Math.sin(radian)),
+				meteorites.add(new Alien(new Vector(ship.getPosition().getX() + (200 * Math.sin(radian)),
 						ship.getPosition().getY() + (200 * Math.cos(radian)))));
 			}
 		}
@@ -310,17 +314,13 @@ class PlayState implements State {
 			score += 50;
 			break;
 		case LARGE:
-			newMeteorites.add(new MediumMeteor(
-					new Vector(position.getX(), position.getY())));
-			newMeteorites.add(new MediumMeteor(
-					new Vector(position.getX(), position.getY())));
+			newMeteorites.add(new MediumMeteor(new Vector(position.getX(), position.getY())));
+			newMeteorites.add(new MediumMeteor(new Vector(position.getX(), position.getY())));
 			score += 15;
 			break;
 		case MEDIUM:
-			newMeteorites.add(new SmallMeteor(
-					new Vector(position.getX(), position.getY())));
-			newMeteorites.add(new SmallMeteor(
-					new Vector(position.getX(), position.getY())));
+			newMeteorites.add(new SmallMeteor(new Vector(position.getX(), position.getY())));
+			newMeteorites.add(new SmallMeteor(new Vector(position.getX(), position.getY())));
 			score += 20;
 			break;
 		default:
@@ -336,30 +336,23 @@ class PlayState implements State {
 		g2d = (Graphics2D) g;
 
 		g2d.setColor(Color.BLACK);
-		g2d.setComposite(
-				AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-		g2d.fillRect(0, 0, constants.getWindowSize().width,
-				constants.getWindowSize().height);
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+		g2d.fillRect(0, 0, constants.getWindowSize().width, constants.getWindowSize().height);
 
 		g2d.setColor(Color.WHITE);
 
 		g2d.setComposite(AlphaComposite.Src);
 
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		g2d.setFont(fontText);
 		g2d.drawString("Score: " + score, 80, 60);
 
 		g2d.setFont(fontText);
-		g2d.drawString("Ships: " + ships,
-				640 - g2d.getFontMetrics().stringWidth("Ships: " + ships) - 80,
-				60);
+		g2d.drawString("Ships: " + ships, 640 - g2d.getFontMetrics().stringWidth("Ships: " + ships) - 80, 60);
 
 		g2d.setFont(fontText);
-		g2d.drawString("Level: " + level,
-				(640 - g2d.getFontMetrics().stringWidth("Level: " + level)) / 2,
-				445);
+		g2d.drawString("Level: " + level, (640 - g2d.getFontMetrics().stringWidth("Level: " + level)) / 2, 445);
 
 		if (hyperSpaceCount < 0) {
 			hyperIndicator.render(g2d);
@@ -385,31 +378,26 @@ class PlayState implements State {
 	private void reset() {
 		shots.clear();
 
-		ship = new Ship(new Vector(constants.getWindowSize().width / 2.0,
-				constants.getWindowSize().height / 2.0));
+		ship = new Ship(new Vector(constants.getWindowSize().width / 2.0, constants.getWindowSize().height / 2.0));
 
 		double radian;
 
 		for (int i = 0; i < meteorites.size(); i++) {
 			radian = Math.PI * 2 * constants.getRandomDouble();
-			meteorites.get(i).setPosition(new Vector(
-					ship.getPosition().getX() + (200 * Math.sin(radian)),
+			meteorites.get(i).setPosition(new Vector(ship.getPosition().getX() + (200 * Math.sin(radian)),
 					ship.getPosition().getY() + (200 * Math.cos(radian))));
 		}
 	}
 
 	private void hyperSpace() {
-		ship = new Ship(new Vector(
-				constants.getWindowSize().width * constants.getRandomDouble(),
-				constants.getWindowSize().height
-						* constants.getRandomDouble()));
+		ship = new Ship(new Vector(constants.getWindowSize().width * constants.getRandomDouble(),
+				constants.getWindowSize().height * constants.getRandomDouble()));
 
 		double radian;
 
 		for (int i = 0; i < meteorites.size(); i++) {
 			radian = Math.PI * 2 * constants.getRandomDouble();
-			meteorites.get(i).setPosition(new Vector(
-					ship.getPosition().getX() + (200 * Math.sin(radian)),
+			meteorites.get(i).setPosition(new Vector(ship.getPosition().getX() + (200 * Math.sin(radian)),
 					ship.getPosition().getY() + (200 * Math.cos(radian))));
 		}
 	}
@@ -420,8 +408,7 @@ class PlayState implements State {
 		for (int i = 0; i < level + 4; i++) {
 			radian = Math.PI * 2 * constants.getRandomDouble();
 
-			meteorites.add(new LargeMeteor(new Vector(
-					ship.getPosition().getX() + (200 * Math.sin(radian)),
+			meteorites.add(new LargeMeteor(new Vector(ship.getPosition().getX() + (200 * Math.sin(radian)),
 					ship.getPosition().getY() + (200 * Math.cos(radian)))));
 		}
 	}
@@ -495,5 +482,6 @@ class PlayState implements State {
 	@Override
 	public void cleanUp() {
 		log.log(Level.INFO, "PlayState - cleaning up.");
+		TinySound.shutdown();
 	}
 }

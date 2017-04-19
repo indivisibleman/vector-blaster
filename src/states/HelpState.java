@@ -70,27 +70,18 @@ class HelpState implements State {
 		meteors = new ArrayList<>();
 
 		for (int i = 0; i < 9; i++) {
-			meteors.add(new SmallMeteor(new Vector(
-					constants.getWindowSize().width
-							* constants.getRandomDouble(),
-					constants.getWindowSize().height
-							* constants.getRandomDouble())));
+			meteors.add(new SmallMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(),
+					constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 
 		for (int i = 0; i < 6; i++) {
-			meteors.add(new MediumMeteor(new Vector(
-					constants.getWindowSize().width
-							* constants.getRandomDouble(),
-					constants.getWindowSize().height
-							* constants.getRandomDouble())));
+			meteors.add(new MediumMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(),
+					constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 
 		for (int i = 0; i < 3; i++) {
-			meteors.add(new LargeMeteor(new Vector(
-					constants.getWindowSize().width
-							* constants.getRandomDouble(),
-					constants.getWindowSize().height
-							* constants.getRandomDouble())));
+			meteors.add(new LargeMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(),
+					constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 
 		fadeIn = true;
@@ -160,55 +151,36 @@ class HelpState implements State {
 		g2d = (Graphics2D) g;
 
 		g2d.setColor(Color.BLACK);
-		g2d.setComposite(
-				AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-		g2d.fillRect(0, 0, constants.getWindowSize().width,
-				constants.getWindowSize().height);
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+		g2d.fillRect(0, 0, constants.getWindowSize().width, constants.getWindowSize().height);
 
 		g2d.setColor(Color.WHITE);
 
-		g2d.setComposite(
-				AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
 
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		for (int i = 0; i < meteors.size(); i++) {
 			meteors.get(i).render(g2d, 0.5f);
 		}
 
-		g2d.setComposite(
-				AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
 
 		g2d.setFont(fontTitle);
-		g2d.drawString("Vector Blaster",
-				(640 - g2d.getFontMetrics().stringWidth("Vector Blaster"))
-						/ 2.0f,
-				110.0f);
+		g2d.drawString("Vector Blaster", (640 - g2d.getFontMetrics().stringWidth("Vector Blaster")) / 2.0f, 110.0f);
 
 		g2d.setFont(fontText);
 		g2d.drawString("Use the Arrow keys to Move, the",
-				(640 - g2d.getFontMetrics()
-						.stringWidth("Use the Arrow keys to Move, the")) / 2.0f,
-				240.0f);
+				(640 - g2d.getFontMetrics().stringWidth("Use the Arrow keys to Move, the")) / 2.0f, 240.0f);
 		g2d.drawString("Spacebar to Fire, Enter for",
-				(640 - g2d.getFontMetrics()
-						.stringWidth("Spacebar to Fire, Enter for")) / 2.0f,
-				290.0f);
+				(640 - g2d.getFontMetrics().stringWidth("Spacebar to Fire, Enter for")) / 2.0f, 290.0f);
 		g2d.drawString("Hyper-Space, P to Pause and Escape",
-				(640 - g2d.getFontMetrics()
-						.stringWidth("Hyper-Space, P to Pause and Escape"))
-						/ 2.0f,
-				340.0f);
-		g2d.drawString("to Exit.",
-				(640 - g2d.getFontMetrics().stringWidth("to Exit.")) / 2.0f,
-				390.0f);
+				(640 - g2d.getFontMetrics().stringWidth("Hyper-Space, P to Pause and Escape")) / 2.0f, 340.0f);
+		g2d.drawString("to Exit.", (640 - g2d.getFontMetrics().stringWidth("to Exit.")) / 2.0f, 390.0f);
 
 		g2d.setColor(Color.BLACK);
-		g2d.setComposite(
-				AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-		g2d.fillRect(0, 0, constants.getWindowSize().width,
-				constants.getWindowSize().height);
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+		g2d.fillRect(0, 0, constants.getWindowSize().width, constants.getWindowSize().height);
 	}
 
 	@Override

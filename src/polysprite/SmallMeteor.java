@@ -56,8 +56,7 @@ public class SmallMeteor extends Sprite {
 
 		smallMeteorColliders.add(smallMeteorCollider);
 
-		initialise(smallMeteorImages, position,
-				(Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI,
+		initialise(smallMeteorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI,
 				(constants.getRandomDouble() * 0.2) - 0.1, SpriteType.SMALL);
 	}
 }

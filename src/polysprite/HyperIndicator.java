@@ -24,14 +24,12 @@ public class HyperIndicator extends Sprite {
 		List<Vector> hyperIndicatorImage = new ArrayList<>();
 
 		for (int i = 0; i < 20; i++) {
-			hyperIndicatorImage
-					.add(new Vector(i * Math.sin(i), i * Math.cos(i)));
+			hyperIndicatorImage.add(new Vector(i * Math.sin(i), i * Math.cos(i)));
 		}
 
 		hyperIndicatorImages.add(hyperIndicatorImage);
 
-		initialise(hyperIndicatorImages, position,
-				(Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, 0.05);
+		initialise(hyperIndicatorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI, 0.05);
 	}
 
 	@Override
@@ -41,10 +39,8 @@ public class HyperIndicator extends Sprite {
 
 			for (Vector point : polyImage) {
 				Vector modifiedPoint = new Vector(
-						point.getX() * Math.cos(orientation + spin)
-								- point.getY() * Math.sin(orientation + spin),
-						point.getY() * Math.cos(orientation + spin)
-								+ point.getX() * Math.sin(orientation + spin));
+						point.getX() * Math.cos(orientation + spin) - point.getY() * Math.sin(orientation + spin),
+						point.getY() * Math.cos(orientation + spin) + point.getX() * Math.sin(orientation + spin));
 				modifiedPoint.add(position);
 
 				modifiedShape.add(modifiedPoint);
@@ -52,19 +48,15 @@ public class HyperIndicator extends Sprite {
 
 			GeneralPath poly = new GeneralPath();
 
-			poly.moveTo(modifiedShape.get(0).getX(),
-					modifiedShape.get(0).getY());
+			poly.moveTo(modifiedShape.get(0).getX(), modifiedShape.get(0).getY());
 
 			for (int i = 1; i < modifiedShape.size(); i++) {
-				poly.lineTo(modifiedShape.get(i).getX(),
-						modifiedShape.get(i).getY());
+				poly.lineTo(modifiedShape.get(i).getX(), modifiedShape.get(i).getY());
 			}
 
 			g2d.setColor(colour);
-			g2d.setComposite(
-					AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-			g2d.setStroke(new BasicStroke(lineThickness, BasicStroke.CAP_ROUND,
-					BasicStroke.JOIN_ROUND));
+			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+			g2d.setStroke(new BasicStroke(lineThickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 			g2d.draw(poly);
 		}
 	}

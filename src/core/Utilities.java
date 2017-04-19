@@ -1,11 +1,16 @@
 package core;
 
+import java.applet.AudioClip;
 import java.awt.Font;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 import core.exception.FontLoadException;
 
@@ -38,9 +43,7 @@ public class Utilities {
 			log.log(Level.SEVERE, "Font: " + filename + " was not loaded", ioe);
 			throw new FontLoadException(ioe.getMessage());
 		} catch (Exception e) {
-			log.log(Level.SEVERE,
-					"Other exception: " + e.toString() + " while loading font.",
-					e);
+			log.log(Level.SEVERE, "Other exception: " + e.toString() + " while loading font.", e);
 			throw new FontLoadException(e.getMessage());
 		}
 	}

@@ -13,12 +13,8 @@ public class Polygon {
 		edges = new ArrayList<>(points.size());
 
 		for (int i = 0; i < points.size(); i++) {
-			edges.add(i,
-					new Vector(
-							points.get((i + 1) % points.size()).getX()
-									- points.get(i).getX(),
-							points.get((i + 1) % points.size()).getY()
-									- points.get(i).getY()));
+			edges.add(i, new Vector(points.get((i + 1) % points.size()).getX() - points.get(i).getX(),
+					points.get((i + 1) % points.size()).getY() - points.get(i).getY()));
 		}
 	}
 

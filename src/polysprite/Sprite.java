@@ -41,15 +41,14 @@ public class Sprite {
 		type = SpriteType.DEFAULT;
 	}
 
-	void initialise(List<List<Vector>> polyImages, Vector position,
-			double orientation, double spinRate, SpriteType type) {
+	void initialise(List<List<Vector>> polyImages, Vector position, double orientation, double spinRate,
+			SpriteType type) {
 		initialise(polyImages, position, orientation, spinRate);
 
 		this.type = type;
 	}
 
-	void initialise(List<List<Vector>> polyImages, Vector position,
-			double orientation, double spinRate) {
+	void initialise(List<List<Vector>> polyImages, Vector position, double orientation, double spinRate) {
 		this.polyImages = polyImages;
 
 		this.position = position;
@@ -68,8 +67,7 @@ public class Sprite {
 
 		for (List<Vector> polyImage : polyImages) {
 			for (Vector point : polyImage) {
-				double radius = Math.sqrt((point.getX() * point.getX())
-						+ (point.getY() * point.getY()));
+				double radius = Math.sqrt((point.getX() * point.getX()) + (point.getY() * point.getY()));
 
 				if (colliderRadius < radius) {
 					colliderRadius = radius;
@@ -103,12 +101,8 @@ public class Sprite {
 
 				for (Vector point : polyImage) {
 					Vector modifiedPoint = new Vector(
-							point.getX() * Math.cos(orientation + spin)
-									- point.getY()
-											* Math.sin(orientation + spin),
-							point.getY() * Math.cos(orientation + spin)
-									+ point.getX()
-											* Math.sin(orientation + spin));
+							point.getX() * Math.cos(orientation + spin) - point.getY() * Math.sin(orientation + spin),
+							point.getY() * Math.cos(orientation + spin) + point.getX() * Math.sin(orientation + spin));
 					modifiedPoint.add(pos);
 
 					modifiedShape.add(modifiedPoint);
@@ -116,21 +110,17 @@ public class Sprite {
 
 				GeneralPath poly = new GeneralPath();
 
-				poly.moveTo(modifiedShape.get(0).getX(),
-						modifiedShape.get(0).getY());
+				poly.moveTo(modifiedShape.get(0).getX(), modifiedShape.get(0).getY());
 
 				for (int i = 1; i < modifiedShape.size(); i++) {
-					poly.lineTo(modifiedShape.get(i).getX(),
-							modifiedShape.get(i).getY());
+					poly.lineTo(modifiedShape.get(i).getX(), modifiedShape.get(i).getY());
 				}
 
 				poly.closePath();
 
 				g2d.setColor(colour);
-				g2d.setComposite(AlphaComposite
-						.getInstance(AlphaComposite.SRC_OVER, alpha));
-				g2d.setStroke(new BasicStroke(lineThickness,
-						BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+				g2d.setStroke(new BasicStroke(lineThickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 				g2d.draw(poly);
 			}
 		}
@@ -150,8 +140,7 @@ public class Sprite {
 		if (Double.doubleToRawLongBits(thrust) == 0) {
 			speed.multiply(0.99);
 		} else {
-			speed = new Vector(thrust * Math.cos(orientation),
-					thrust * Math.sin(orientation));
+			speed = new Vector(thrust * Math.cos(orientation), thrust * Math.sin(orientation));
 		}
 
 		position.add(speed);
@@ -185,53 +174,39 @@ public class Sprite {
 		offsetPositions.add(position);
 
 		if (position.getX() - this.getRadius() < 0.0) {
-			offsetPositions.add(new Vector(
-					position.getX() + constants.getWindowSize().width,
-					position.getY()));
+			offsetPositions.add(new Vector(position.getX() + constants.getWindowSize().width, position.getY()));
 
 			if (position.getY() - this.getRadius() < 0.0) {
-				offsetPositions.add(new Vector(
-						position.getX() + constants.getWindowSize().width,
+				offsetPositions.add(new Vector(position.getX() + constants.getWindowSize().width,
 						position.getY() + constants.getWindowSize().height));
 			}
 
-			if (position.getY()
-					+ this.getRadius() > constants.getWindowSize().height) {
-				offsetPositions.add(new Vector(
-						position.getX() + constants.getWindowSize().width,
+			if (position.getY() + this.getRadius() > constants.getWindowSize().height) {
+				offsetPositions.add(new Vector(position.getX() + constants.getWindowSize().width,
 						position.getY() - constants.getWindowSize().height));
 			}
 		}
 
-		if (position.getX()
-				+ this.getRadius() > constants.getWindowSize().width) {
-			offsetPositions.add(new Vector(
-					position.getX() - constants.getWindowSize().width,
-					position.getY()));
+		if (position.getX() + this.getRadius() > constants.getWindowSize().width) {
+			offsetPositions.add(new Vector(position.getX() - constants.getWindowSize().width, position.getY()));
 
 			if (position.getY() - this.getRadius() < 0.0) {
-				offsetPositions.add(new Vector(
-						position.getX() - constants.getWindowSize().width,
+				offsetPositions.add(new Vector(position.getX() - constants.getWindowSize().width,
 						position.getY() + constants.getWindowSize().height));
 			}
 
-			if (position.getY()
-					+ this.getRadius() > constants.getWindowSize().height) {
-				offsetPositions.add(new Vector(
-						position.getX() - constants.getWindowSize().width,
+			if (position.getY() + this.getRadius() > constants.getWindowSize().height) {
+				offsetPositions.add(new Vector(position.getX() - constants.getWindowSize().width,
 						position.getY() - constants.getWindowSize().height));
 			}
 		}
 
 		if (position.getY() - this.getRadius() < 0.0) {
-			offsetPositions.add(new Vector(position.getX(),
-					position.getY() + constants.getWindowSize().height));
+			offsetPositions.add(new Vector(position.getX(), position.getY() + constants.getWindowSize().height));
 		}
 
-		if (position.getY()
-				+ this.getRadius() > constants.getWindowSize().height) {
-			offsetPositions.add(new Vector(position.getX(),
-					position.getY() - constants.getWindowSize().height));
+		if (position.getY() + this.getRadius() > constants.getWindowSize().height) {
+			offsetPositions.add(new Vector(position.getX(), position.getY() - constants.getWindowSize().height));
 		}
 
 		return offsetPositions;
@@ -250,12 +225,8 @@ public class Sprite {
 
 				for (Vector point : polyImage) {
 					Vector modifiedPoint = new Vector(
-							point.getX() * Math.cos(orientation + spin)
-									- point.getY()
-											* Math.sin(orientation + spin),
-							point.getY() * Math.cos(orientation + spin)
-									+ point.getX()
-											* Math.sin(orientation + spin));
+							point.getX() * Math.cos(orientation + spin) - point.getY() * Math.sin(orientation + spin),
+							point.getY() * Math.cos(orientation + spin) + point.getX() * Math.sin(orientation + spin));
 
 					modifiedPoint.add(pos);
 

@@ -65,6 +65,8 @@ class GameEngine implements Runnable, KeyListener {
 
 		canvas.createBufferStrategy(2);
 		buffer = canvas.getBufferStrategy();
+		
+		graphics = buffer.getDrawGraphics();
 
 		stateManager = StateManager.getInstance();
 		stateManager.push(new IntroState());
@@ -82,8 +84,7 @@ class GameEngine implements Runnable, KeyListener {
 			while (accumulator >= constants.getTimeStep()) {
 				accumulator -= constants.getTimeStep();
 
-				if (!stateManager.isEmpty()
-						&& stateManager.currentState().justLoaded()) {
+				if (!stateManager.isEmpty() && stateManager.currentState().justLoaded()) {
 					accumulator = 0.0f;
 				}
 
@@ -113,11 +114,8 @@ class GameEngine implements Runnable, KeyListener {
 	}
 
 	private void render() {
-		graphics = buffer.getDrawGraphics();
-
 		graphics.setColor(Color.BLACK);
-		graphics.fillRect(0, 0, constants.getWindowSize().width,
-				constants.getWindowSize().height);
+		graphics.fillRect(0, 0, constants.getWindowSize().width, constants.getWindowSize().height);
 
 		if (!stateManager.isEmpty()) {
 			stateManager.currentState().render(graphics);

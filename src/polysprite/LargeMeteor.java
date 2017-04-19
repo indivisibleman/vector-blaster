@@ -87,8 +87,7 @@ public class LargeMeteor extends Sprite {
 
 		largeMeteorColliders.add(largeMeteorCollider);
 
-		initialise(largeMeteorImages, position,
-				(Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI,
+		initialise(largeMeteorImages, position, (Math.PI * 2.0 * constants.getRandomDouble()) - Math.PI,
 				(constants.getRandomDouble() * 0.2) - 0.1, SpriteType.LARGE);
 	}
 }

@@ -21,8 +21,7 @@ public class Explosion {
 		int numPieces = 3 + constants.getRandomInt(8);
 
 		for (int i = 0; i < numPieces; i++) {
-			pieces.add(new ExplosionPiece(
-					new Vector(position.getX(), position.getY())));
+			pieces.add(new ExplosionPiece(new Vector(position.getX(), position.getY())));
 		}
 	}
 

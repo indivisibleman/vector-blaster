@@ -40,16 +40,11 @@ public class IntroState implements State {
 	private boolean fadeIn = false;
 	private boolean fadeOut = false;
 
-	private Font font;
 	private Font fontTitle;
 	private Font fontText;
 
-	private Graphics2D g2d;
-	private StateManager stateManager;
-
-	private Utilities util;
-
-	private Constants constants;
+	private StateManager stateManager = StateManager.getInstance();
+	private Constants constants = Constants.getInstance();
 
 	private Logger log = Logger.getLogger(this.getClass().getName());
 
@@ -57,40 +52,27 @@ public class IntroState implements State {
 	public void initialise() throws FontLoadException {
 		log.log(Level.INFO, "IntroState - initialising.");
 
-		stateManager = StateManager.getInstance();
+		Utilities util = Utilities.getInstance();
 
-		util = Utilities.getInstance();
-
-		constants = Constants.getInstance();
-
-		font = util.getFont("BPneon.ttf");
+		Font font = util.getFont("BPneon.ttf");
 		fontTitle = font.deriveFont(60.0f);
 		fontText = font.deriveFont(42.0f);
 
 		meteors = new ArrayList<>();
 
 		for (int i = 0; i < 9; i++) {
-			meteors.add(new SmallMeteor(new Vector(
-					constants.getWindowSize().width
-							* constants.getRandomDouble(),
-					constants.getWindowSize().height
-							* constants.getRandomDouble())));
+			meteors.add(new SmallMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(),
+					constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 
 		for (int i = 0; i < 6; i++) {
-			meteors.add(new MediumMeteor(new Vector(
-					constants.getWindowSize().width
-							* constants.getRandomDouble(),
-					constants.getWindowSize().height
-							* constants.getRandomDouble())));
+			meteors.add(new MediumMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(),
+					constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 
 		for (int i = 0; i < 3; i++) {
-			meteors.add(new LargeMeteor(new Vector(
-					constants.getWindowSize().width
-							* constants.getRandomDouble(),
-					constants.getWindowSize().height
-							* constants.getRandomDouble())));
+			meteors.add(new LargeMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(),
+					constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 
 		fadeIn = true;
@@ -157,49 +139,34 @@ public class IntroState implements State {
 
 	@Override
 	public void render(Graphics g) {
-		g2d = (Graphics2D) g;
+		Graphics2D g2d = (Graphics2D) g;
 
 		g2d.setColor(Color.BLACK);
-		g2d.setComposite(
-				AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-		g2d.fillRect(0, 0, constants.getWindowSize().width,
-				constants.getWindowSize().height);
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+		g2d.fillRect(0, 0, constants.getWindowSize().width, constants.getWindowSize().height);
 
 		g2d.setColor(Color.WHITE);
 
-		g2d.setComposite(
-				AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
 
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		for (int i = 0; i < meteors.size(); i++) {
 			meteors.get(i).render(g2d, 0.5f);
 		}
 
-		g2d.setComposite(
-				AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
 
 		g2d.setFont(fontTitle);
-		g2d.drawString("Vector Blaster",
-				(640 - g2d.getFontMetrics().stringWidth("Vector Blaster"))
-						/ 2.0f,
-				110.0f);
+		g2d.drawString("Vector Blaster", (640 - g2d.getFontMetrics().stringWidth("Vector Blaster")) / 2.0f, 110.0f);
 
 		g2d.setFont(fontText);
-		g2d.drawString("Press any key",
-				(640 - g2d.getFontMetrics().stringWidth("Press any Key"))
-						/ 2.0f,
-				270.0f);
-		g2d.drawString("to start",
-				(640 - g2d.getFontMetrics().stringWidth("to start")) / 2.0f,
-				310.0f);
+		g2d.drawString("Press any key", (640 - g2d.getFontMetrics().stringWidth("Press any Key")) / 2.0f, 270.0f);
+		g2d.drawString("to start", (640 - g2d.getFontMetrics().stringWidth("to start")) / 2.0f, 310.0f);
 
 		g2d.setColor(Color.BLACK);
-		g2d.setComposite(
-				AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-		g2d.fillRect(0, 0, constants.getWindowSize().width,
-				constants.getWindowSize().height);
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+		g2d.fillRect(0, 0, constants.getWindowSize().width, constants.getWindowSize().height);
 	}
 
 	@Override

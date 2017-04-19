@@ -89,27 +89,18 @@ class MenuState implements State {
 		meteors = new ArrayList<>();
 
 		for (int i = 0; i < 9; i++) {
-			meteors.add(new SmallMeteor(new Vector(
-					constants.getWindowSize().width
-							* constants.getRandomDouble(),
-					constants.getWindowSize().height
-							* constants.getRandomDouble())));
+			meteors.add(new SmallMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(),
+					constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 
 		for (int i = 0; i < 6; i++) {
-			meteors.add(new MediumMeteor(new Vector(
-					constants.getWindowSize().width
-							* constants.getRandomDouble(),
-					constants.getWindowSize().height
-							* constants.getRandomDouble())));
+			meteors.add(new MediumMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(),
+					constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 
 		for (int i = 0; i < 3; i++) {
-			meteors.add(new LargeMeteor(new Vector(
-					constants.getWindowSize().width
-							* constants.getRandomDouble(),
-					constants.getWindowSize().height
-							* constants.getRandomDouble())));
+			meteors.add(new LargeMeteor(new Vector(constants.getWindowSize().width * constants.getRandomDouble(),
+					constants.getWindowSize().height * constants.getRandomDouble())));
 		}
 
 		choiceMarkers = new ArrayList<>();
@@ -233,60 +224,50 @@ class MenuState implements State {
 		g2d = (Graphics2D) g;
 
 		g2d.setColor(Color.BLACK);
-		g2d.setComposite(
-				AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-		g2d.fillRect(0, 0, constants.getWindowSize().width,
-				constants.getWindowSize().height);
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+		g2d.fillRect(0, 0, constants.getWindowSize().width, constants.getWindowSize().height);
 
 		g2d.setColor(Color.WHITE);
 
-		g2d.setComposite(
-				AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
 
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		for (int i = 0; i < meteors.size(); i++) {
 			meteors.get(i).render(g2d, 0.5f);
 		}
 
-		g2d.setComposite(
-				AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
 
 		g2d.setFont(fontTitle);
 		g2d.drawString("Vector Blaster",
-				(constants.getWindowSize().width
-						- g2d.getFontMetrics().stringWidth("Vector Blaster"))
-						/ 2.0f,
-				110.0f);
+				(constants.getWindowSize().width - g2d.getFontMetrics().stringWidth("Vector Blaster")) / 2.0f, 110.0f);
 
 		g2d.setFont(fontText);
 		for (int i = 0; i < menuOptions.length; i++) {
 			g2d.drawString(menuOptions[i],
-					(constants.getWindowSize().width
-							- g2d.getFontMetrics().stringWidth(menuOptions[i]))
-							/ 2.0f,
+					(constants.getWindowSize().width - g2d.getFontMetrics().stringWidth(menuOptions[i])) / 2.0f,
 					215.0f + 50 * i);
 		}
 
 		choiceMarkers.get(0)
-				.setPosition(new Vector((constants.getWindowSize().width
-						- g2d.getFontMetrics().stringWidth(menuOptions[choice]))
-						/ 2.0f - 20.0f, 200.0f + 50 * choice));
+				.setPosition(new Vector(
+						(constants.getWindowSize().width - g2d.getFontMetrics().stringWidth(menuOptions[choice])) / 2.0f
+								- 20.0f,
+						200.0f + 50 * choice));
 		choiceMarkers.get(1)
-				.setPosition(new Vector((constants.getWindowSize().width
-						+ g2d.getFontMetrics().stringWidth(menuOptions[choice]))
-						/ 2.0f + 20.0f, 200.0f + 50 * choice));
+				.setPosition(new Vector(
+						(constants.getWindowSize().width + g2d.getFontMetrics().stringWidth(menuOptions[choice])) / 2.0f
+								+ 20.0f,
+						200.0f + 50 * choice));
 
 		for (int i = 0; i < choiceMarkers.size(); i++) {
 			choiceMarkers.get(i).render(g2d);
 		}
 
 		g2d.setColor(Color.BLACK);
-		g2d.setComposite(
-				AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-		g2d.fillRect(0, 0, constants.getWindowSize().width,
-				constants.getWindowSize().height);
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+		g2d.fillRect(0, 0, constants.getWindowSize().width, constants.getWindowSize().height);
 	}
 
 	@Override
